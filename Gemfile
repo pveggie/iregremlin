@@ -34,6 +34,16 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+
+  # --- Testing Frameworks -------------------------------------
+  gem 'rspec-rails', '~> 3.5'
+  gem 'capybara'
+  # Poltergeist requires phantomjs to be installed on the machine.
+  # http://phantomjs.org/download.html
+  gem 'poltergeist'
+  # Teaspoon can also use phantomjs for headless testing
+  # https://github.com/jejacks0n/teaspoon
+  gem "teaspoon-jasmine"
 end
 
 group :development do

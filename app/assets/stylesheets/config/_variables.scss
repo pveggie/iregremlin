@@ -2,9 +2,10 @@
  * Fonts
  * ------------------------------------- */
 // Google fonts
-@import url('https://fonts.googleapis.com/css?family=Dosis:400,700|Open+Sans:400,300,700');
-$base-font: "Open Sans", "Helvetica", "sans-serif";
-$header-font: "Dosis", "Arial", "sans-serif";
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Unicase|PT+Sans');
+
+$base-font: 'PT Sans', "Helvetica", "sans-serif";
+$header-font: "Cormorant Unicase", "Times", "serif";
 
 // Local fonts (uncomment following lines)
 // @font-face {

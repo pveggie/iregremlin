@@ -1,15 +1,22 @@
 /* Main class */
 .navbar {
   // box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
-  background: white;
+  color: white;
+  // background: #134611;
+  // background: #315c2b;
+  // background: #386c0b;
+  background: #274B07;
+
   transition: all 0.3s ease;
   height: 120px;
   padding-top: 10px;
+  margin: 0;
+
+  @media (min-width: $screen-md-min) {
+    padding-left: 70px;
+  }
 }
 
-// @media (min-width: $screen-md-min) {
-//   padding-left: 70px;
-// }
 
 /* Optional class to fix the navbar on top */
 .navbar-fixed {
@@ -31,7 +38,8 @@
 
 .navbar-logo {
   h1 {
-    font-weight: bold;
+    text-shadow: -2px 2px 2px #b8b42d;
+    // font-weight: bold;
     margin-bottom: 0;
   }
 }

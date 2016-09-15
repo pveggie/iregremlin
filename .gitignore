@@ -14,3 +14,6 @@
 
 #Ignore secrets
 secrets.yml
+
+#Ignore RSpec logs
+spec/examples.txt

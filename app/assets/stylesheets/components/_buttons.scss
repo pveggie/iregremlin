@@ -1,0 +1,25 @@
+.btn-admin {
+
+  i, a {
+    color: $brand-color;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.btn-transparent {
+  opacity: 0.8;
+}
+
+.btn-social-media {
+  i {
+    color: $gray-light;
+
+    &:hover {
+      color: $brand-color;
+      opacity: 0.8;
+    }
+  }
+}

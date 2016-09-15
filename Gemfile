@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+##### -- Generated gems -----------------------------
 gem 'rails', '5.0.0.1'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.13', '< 0.5'
@@ -31,45 +32,41 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+### --- My Gems --------------------------------------------------
+gem 'bootstrap-sass'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'spring'
 
   # --- Testing Frameworks -------------------------------------
   gem 'rspec-rails', '~> 3.5'
+  # Teaspoon can use phantomjs for headless testing
+  # https://github.com/jejacks0n/teaspoon
+  gem "teaspoon-jasmine"
+end
+
+group :test do
   gem 'capybara'
   # Poltergeist requires phantomjs to be installed on the machine.
   # http://phantomjs.org/download.html
   gem 'poltergeist'
-  # Teaspoon can also use phantomjs for headless testing
-  # https://github.com/jejacks0n/teaspoon
-  gem "teaspoon-jasmine"
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
 end
 
 # From another project
-# source 'https://rubygems.org'
-# ruby '2.3.0'
 
-# gem 'rails', '4.2.6'
 # gem 'puma'
-# gem 'pg'
 # gem 'figaro'
-# gem 'jbuilder', '~> 2.0'
 # gem 'devise'
 # gem 'redis'
 
-# gem 'sass-rails'
-# gem 'jquery-rails'
-# gem 'uglifier'
-# gem 'bootstrap-sass'
+
 # gem 'font-awesome-sass'
 # gem 'simple_form'
 # gem 'autoprefixer-rails'
@@ -81,8 +78,7 @@ end
 #   gem 'quiet_assets'
 #   gem 'pry-byebug'
 #   gem 'pry-rails'
-#   gem 'spring'
-#   gem 'rspec-rails', '~> 3.4'
+
 #   gem 'spring-commands-rspec'
 #   # https://github.com/thoughtbot/factory_girl_rails
 #   gem 'factory_girl_rails'
@@ -94,10 +90,8 @@ end
 #   gem 'shoulda-matchers', '~> 3.1'
 #   # https://github.com/jdliss/shoulda-callback-matchers
 #   gem 'shoulda-callback-matchers', '~> 1.1.1'
-#   gem 'capybara'
 #   gem 'guard-rspec', require: false
 #   gem 'launchy'
-#   gem 'poltergeist'
 #   gem 'database_cleaner'
 # end
 

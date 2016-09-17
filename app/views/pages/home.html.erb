@@ -9,11 +9,15 @@
 
       <div class="padded bg-white full-height">
         <table class="border-collapse grid-game">
-          <% 10.times do %>
+          <% @puzzle.rows.each do |row| %>
             <tr>
-              <% 10.times do %>
-                <td style="background-image: url(<%= asset_path 'background_1_tree.jpg' %>);">
+              <% row.cells.each do |cell| %>
+                <% if cell.image.blank? %>
+                  <td></td>
+                <% else %>
+                  <td style="background-image: url(<%= asset_path cell.image %>);">
                 </td>
+                <% end %>
               <% end %>
             </tr>
           <% end %>
@@ -21,7 +25,6 @@
       </div>
 
     </div>
-
 
   </div>
 </div>

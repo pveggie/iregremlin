@@ -34,17 +34,23 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 ### --- My Gems --------------------------------------------------
 gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'spring'
+  gem 'spring-commands-rspec'
 
   # --- Testing Frameworks -------------------------------------
   gem 'rspec-rails', '~> 3.5'
   # Teaspoon can use phantomjs for headless testing
   # https://github.com/jejacks0n/teaspoon
   gem "teaspoon-jasmine"
+
+  # --- Testing Tools -------------------------------------
+  gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 group :test do
@@ -52,6 +58,11 @@ group :test do
   # Poltergeist requires phantomjs to be installed on the machine.
   # http://phantomjs.org/download.html
   gem 'poltergeist'
+  # https://github.com/thoughtbot/shoulda-matchers
+  gem 'shoulda-matchers', '~> 3.1'
+  # https://github.com/jdliss/shoulda-callback-matchers
+  gem 'shoulda-callback-matchers', '~> 1.1.1'
+  gem 'database_cleaner'
 end
 
 group :development do
@@ -66,33 +77,25 @@ end
 # gem 'devise'
 # gem 'redis'
 
-
 # gem 'font-awesome-sass'
 # gem 'simple_form'
-# gem 'autoprefixer-rails'
 
 
 # group :development, :test do
 #   gem 'binding_of_caller'
 #   gem 'better_errors'
-#   gem 'quiet_assets'
+##   gem 'quiet_assets'#deprecated
 #   gem 'pry-byebug'
 #   gem 'pry-rails'
 
 #   gem 'spring-commands-rspec'
 #   # https://github.com/thoughtbot/factory_girl_rails
-#   gem 'factory_girl_rails'
-#   gem 'faker'
+
 # end
 
 # group :test do
-#   # https://github.com/thoughtbot/shoulda-matchers
-#   gem 'shoulda-matchers', '~> 3.1'
-#   # https://github.com/jdliss/shoulda-callback-matchers
-#   gem 'shoulda-callback-matchers', '~> 1.1.1'
 #   gem 'guard-rspec', require: false
 #   gem 'launchy'
-#   gem 'database_cleaner'
 # end
 
 # group :production do

@@ -18,7 +18,7 @@ class Cell < ApplicationRecord
 
   # == Instance Methods =====================================================
   def set_image
-    self.image = "#{content}.jpg"
+    self.image = content.blank? ? nil : "#{content}.jpg"
   end
 
   def image_missing?

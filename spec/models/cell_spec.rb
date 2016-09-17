@@ -28,6 +28,11 @@ RSpec.describe Cell, type: :model do
        expect(Cell.last.image).to eq("hello.jpg")
     end
 
+    it "#set_image leaves the cell's image as nil if the content is nil" do
+      create(:cell, content: nil, image: nil)
+      expect(Cell.last.image).to eq(nil)
+    end
+
     it "#set_image is not called if image is provided" do
       create(:cell, content: "hello", image: "goodbye.jpg")
       expect(Cell.last.image).to eq("goodbye.jpg")

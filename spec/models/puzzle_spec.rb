@@ -11,7 +11,6 @@ RSpec.describe Puzzle, type: :model do
     # Associations
     it { expect(valid_puzzle).to have_many(:rows).dependent(:destroy) }
     it { expect(valid_puzzle).to have_many(:cells).through(:rows) }
-    # it { expect(user).to have_many(:wishlist_items).through(:wishlist) }
     #it { expect(gallery).to accept_nested_attributes_for(:paintings) }
   end
 end

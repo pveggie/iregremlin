@@ -1,4 +1,4 @@
-.grid-game {
+.game-grid{
     margin: 30px auto;
 
   td {
@@ -15,3 +15,32 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8fc400', endColorstr='#9aa800',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
   }
 }
+
+// ------------- Backgrounds -------------- //
+
+.tree {
+  background-image: image-tag(tree.jpg)
+}
+
+.hill {
+  background-image: image-tag(hill.jpg)
+}
+
+.ire {
+  background-image: image-tag(ire.jpg)
+}
+
+.axe {
+  background-image: image-tag(axe.jpg)
+}
+
+.sword {
+  background-image: image-tag(sword.jpg)
+}
+
+.lance {
+  background-image: image-tag(lance.jpg)
+}
+
+
+

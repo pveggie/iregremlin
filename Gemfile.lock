@@ -1,5 +1,6 @@
 GEM
   remote: https://rubygems.org/
+  remote: https://rails-assets.org/
   specs:
     actioncable (5.0.0.1)
       actionpack (= 5.0.0.1)
@@ -124,6 +125,7 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 5.0.0.1)
       sprockets-rails (>= 2.0.0)
+    rails-assets-easystarjs (0.3.0)
     rails-dom-testing (2.0.1)
       activesupport (>= 4.2.0, < 6.0)
       nokogiri (~> 1.6.0)
@@ -186,9 +188,6 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
-    turbolinks (5.0.1)
-      turbolinks-source (~> 5)
-    turbolinks-source (5.0.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.2)
@@ -221,6 +220,7 @@ DEPENDENCIES
   mysql2 (>= 0.3.13, < 0.5)
   poltergeist
   rails (= 5.0.0.1)
+  rails-assets-easystarjs!
   rspec-rails (~> 3.5)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
@@ -229,7 +229,6 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   teaspoon-jasmine
-  turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
 

@@ -7,7 +7,7 @@
     width: 40px;
     height: 40px;
 
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#8fc400+8,9aa800+100 */
+    // /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#8fc400+8,9aa800+100 */
     background: rgb(143,196,0); /* Old browsers */
     background: -moz-radial-gradient(center, ellipse cover, rgba(143,196,0,1) 8%, rgba(154,168,0,1) 100%); /* FF3.6-15 */
     background: -webkit-radial-gradient(center, ellipse cover, rgba(143,196,0,1) 8%,rgba(154,168,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -18,28 +18,28 @@
 
 // ------------- Backgrounds -------------- //
 
-.tree {
-  background-image: image-tag(tree.jpg)
+td.tree {
+  background-image: image-url('tree.jpg');
 }
 
-.hill {
-  background-image: image-tag(hill.jpg)
+td.hill {
+  background: image-url('hill.jpg');
 }
 
-.ire {
-  background-image: image-tag(ire.jpg)
+td.ire {
+  background-image: image-url('ire.jpg');
 }
 
-.axe {
-  background-image: image-tag(axe.jpg)
+td.axe {
+  background-image: image-url('axe.jpg');
 }
 
-.sword {
-  background-image: image-tag(sword.jpg)
+td.sword {
+  background-image: image-url('sword.jpg');
 }
 
-.lance {
-  background-image: image-tag(lance.jpg)
+td.lance {
+  background-image: image-url('lance.jpg');
 }
 
 

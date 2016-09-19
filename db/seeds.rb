@@ -23,8 +23,6 @@ rows = [
   ["hill", "hill", nil, nil, nil, nil, nil, nil, nil, nil]
 ]
 
-
-
 puzzle = Puzzle.create(
   number: 1,
   name: "A quest begins",

@@ -30,12 +30,12 @@ puzzle = Puzzle.create(
   name: "A quest begins",
 )
 
-row_number = 0
+row_number = -1
 
 rows.each do |row|
   created_row = Row.create(row_number: row_number += 1, puzzle: puzzle)
 
-  col_number = 0
+  col_number = -1
   row.each do |cell|
     Cell.create(column_number: col_number += 1, row: created_row, content: cell)
   end

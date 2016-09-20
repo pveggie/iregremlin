@@ -39,18 +39,36 @@ $(document).ready ->
       parseInt coord
 
   # Use pathfinding library to calculate shortest path, accounting for obstacles
-  checkPath = (ire, target) ->
+  checkPath = (ire, target, clickedCell) ->
     map.updateMatrix()
     filledMatrix = map.matrix
     console.log filledMatrix
 
     grid = new PF.Grid filledMatrix
-    # make enemy walkable
-    grid.setWalkableAt(target[0], target[1], true);
+    # make enemy walkable so path to it can be generated
+    if $( clickedCell ).data().cellType is "enemy"
+      grid.setWalkableAt(target[0], target[1], true);
+
     finder = new PF.AStarFinder
 
     # 0 is x coordinate (column) and 1 is y coordinate (row)
     path = finder.findPath ire[0], ire[1], target[0], target[1], grid
+
+  moveIre = (path) ->
+    for step in path
+      coords = step[0] + "-" + step[1]
+      oldCell = $('.ire')
+      nextCell = $('#' + coords)
+      console.log nextCell
+
+      # jQuery.data( '.ire', "cellContent", "empty" );
+      oldCell.data 'cellType', 'field'
+      oldCell.data('cellContent', 'empty')
+      oldCell.addClass('empty')
+      oldCell.removeClass('ire')
+
+      nextCell.removeClass()
+      nextCell.addClass('ire')
 
 
   # end location (user click)
@@ -58,8 +76,9 @@ $(document).ready ->
     ire = ireLocation()
     target = targetLocation this
 
-    path = checkPath ire, target
-    if path.length <= 6 then console.log "valid"  else console.log "invalid"
-    console.log path
+    path = checkPath ire, target, this
+    moveIre path if path.length <= 6 and path.length isnt 0
+    # if path.length <= 6 then console.log "valid"  else console.log "invalid"
+    # console.log path
 
   map = new Map

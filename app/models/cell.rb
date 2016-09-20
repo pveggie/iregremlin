@@ -14,11 +14,25 @@ class Cell < ApplicationRecord
 
   # == Callbacks ============================================================
   before_validation :set_image, if: :image_missing?
+  before_validation :set_type
+
   # == Class Methods ========================================================
 
   # == Instance Methods =====================================================
   def set_image
     self.image = content.blank? ? nil : "#{content}.jpg"
+  end
+
+  def set_type
+    if content.blank?
+      self.content_type = "field"
+    elsif content == "ire"
+      self.content_type = "ire"
+    elsif content == "hill" || content == "tree"
+      self.content_type = "obstacle"
+    else
+      self.content_type = "enemy"
+    end
   end
 
   def image_missing?

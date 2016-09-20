@@ -2,55 +2,63 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).ready ->
-  # get size of grid and create blank matrix array
-  initializeMatrix = ->
-    cellCount = $('td').length
-    side = Math.sqrt cellCount
 
-    matrix = new Array(side)
-    for num in [0...side]
-      matrix[num] = new Array(side)
-    return matrix
+  class Map
+    # get size of grid and create blank matrix array
+    constructor: ->
+      numRows = Math.sqrt $('td').length
+      # Assuming all maps are square
+      @matrix = new Array(numRows)
+      for num in [0...numRows]
+        @matrix[num] = new Array(numRows)
 
+    # update grid to reflect walkable and non-walkable cells
+    updateMatrix: ->
+      matrix = @matrix
 
-  matrix = initializeMatrix()
+      $('td').each (@matrix)->
+        coords = @dataset.cellCoords.split '-'
+        row = parseInt coords[0]
+        col = parseInt coords[1]
 
-  # fill matrix with walkable and non-walkable cells
-  fillMatrix = ->
-    $('td').each ->
-      coords = @dataset.cellCoords.split '-'
-      row = parseInt coords[0]
-      col = parseInt coords[1]
+        content = @dataset.cellContent
+        matrix[row][col] = if content is "empty" then 0 else 1
 
-      content = @dataset.cellContent
-      if content is "empty"
-        matrix[row][col] = 0
-      else
-        matrix[row][col] = 1
-    return matrix
-
+  # -------------------------------------------------------------------
 
   # get Ire's location (start point)
-  locateIre = ->
+  ireLocation = ->
     coords = $('.ire').data().cellCoords.split '-'
     return coords.map ( coord ) ->
       parseInt coord
 
-  ire = locateIre()
+  # get target location from user's click
+  targetLocation = (clickedCell) ->
+    coords = clickedCell.dataset.cellCoords.split '-'
+    return coords.map (coord) ->
+      parseInt coord
 
-  # end location (user click)
-  end_x = 4
-  end_y = 2
+
 
   # Use pathfinding library to calculate shortest path, accounting for obstacles
-  filledMatrix = fillMatrix()
-  grid = new PF.Grid filledMatrix
-  finder = new PF.AStarFinder
+  checkPath = (ire, target) ->
+    map.updateMatrix()
+    filledMatrix = map.matrix
+    console.log filledMatrix
 
-  path = finder.findPath ire[0], ire[1], end_x, end_y, grid
+    grid = new PF.Grid filledMatrix
+    finder = new PF.AStarFinder
 
-  # Check path is short enough
-  validDestination = path.length <= 5
+    path = finder.findPath ire[0], ire[1], target[0], target[1], grid
 
 
-  console.log path
+  # end location (user click)
+  $('td').click ->
+    ire = ireLocation()
+    target = targetLocation this
+
+    path = checkPath ire, target
+    if path.length <= 6 then console.log "valid"  else console.log "invalid"
+    console.log path
+
+  map = new Map

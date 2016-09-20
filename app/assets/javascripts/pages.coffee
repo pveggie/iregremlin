@@ -18,8 +18,8 @@ $(document).ready ->
 
       $('td').each (@matrix)->
         coords = @dataset.cellCoords.split '-'
-        row = parseInt coords[0]
-        col = parseInt coords[1]
+        col = parseInt coords[0]
+        row = parseInt coords[1]
 
         content = @dataset.cellContent
         matrix[row][col] = if content is "empty" then 0 else 1
@@ -45,9 +45,11 @@ $(document).ready ->
     console.log filledMatrix
 
     grid = new PF.Grid filledMatrix
+    # make enemy walkable
+    grid.setWalkableAt(target[0], target[1], true);
     finder = new PF.AStarFinder
 
-    # 0 is x coordinate and 1 is y coordinate
+    # 0 is x coordinate (column) and 1 is y coordinate (row)
     path = finder.findPath ire[0], ire[1], target[0], target[1], grid
 
 

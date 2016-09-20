@@ -12,7 +12,7 @@
           <% @puzzle.rows.each do |row| %>
             <tr>
               <% row.cells.each do |cell| %>
-                <td class="<%= cell.content || "empty" %>" data-cell-coords="<%= row.row_number %>-<%= cell.column_number %>">
+                <td class="<%= cell.content || "empty" %>" data-cell-coords="<%= row.row_number %>-<%= cell.column_number %>" data-cell-content="<%= cell.content || "empty" %>">
               <% end %>
             </tr>
           <% end %>

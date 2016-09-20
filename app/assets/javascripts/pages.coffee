@@ -38,8 +38,6 @@ $(document).ready ->
     return coords.map (coord) ->
       parseInt coord
 
-
-
   # Use pathfinding library to calculate shortest path, accounting for obstacles
   checkPath = (ire, target) ->
     map.updateMatrix()
@@ -49,6 +47,7 @@ $(document).ready ->
     grid = new PF.Grid filledMatrix
     finder = new PF.AStarFinder
 
+    # 0 is x coordinate and 1 is y coordinate
     path = finder.findPath ire[0], ire[1], target[0], target[1], grid
 
 

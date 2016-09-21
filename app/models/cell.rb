@@ -25,7 +25,7 @@ class Cell < ApplicationRecord
 
   def set_type
     if content.blank?
-      self.content_type = "field"
+      self.content_type = "empty"
     elsif content == "ire"
       self.content_type = "ire"
     elsif content == "hill" || content == "tree"

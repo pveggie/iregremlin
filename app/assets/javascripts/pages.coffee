@@ -14,71 +14,83 @@ $(document).ready ->
 
     # update grid to reflect walkable and non-walkable cells
     updateMatrix: ->
+      # Define matrix for use in iterator becuase in the iterator
+      # 'this/@' is the td rather than the puzzle object
       matrix = @matrix
 
-      $('td').each (@matrix)->
-        coords = @dataset.cellCoords.split '-'
+      $('td').each ->
+        # td objects are different from the ones obtained with class
+        # selectors. They don't respond to attr method, but instead
+        # id can be called directly.
+        coords = @id.split '-'
         col = parseInt coords[0]
         row = parseInt coords[1]
 
-        content = @dataset.cellContent
-        matrix[row][col] = if content is "empty" then 0 else 1
+        type = @dataset.cellType
+        matrix[row][col] = if type is "empty" then 0 else 1
 
   # -------------------------------------------------------------------
 
-  # get Ire's location (start point)
-  ireLocation = ->
-    coords = $('.ire').data().cellCoords.split '-'
-    return coords.map ( coord ) ->
-      parseInt coord
-
-  # get target location from user's click
-  targetLocation = (clickedCell) ->
-    coords = clickedCell.dataset.cellCoords.split '-'
-    return coords.map (coord) ->
+  # Get Ire and Target coordinates for the path calculator
+  #
+  # Note that this requires correct type of object. Object from selector works,
+  # object directly from user click does not.
+  getCoords = (cellObject) ->
+    coords = cellObject.attr('id').split '-'
+    coords.map (coord) ->
       parseInt coord
 
   # Use pathfinding library to calculate shortest path, accounting for obstacles
-  checkPath = (ire, target, clickedCell) ->
+  findPath = (targetObject) ->
     map.updateMatrix()
     filledMatrix = map.matrix
-    console.log filledMatrix
 
     grid = new PF.Grid filledMatrix
+
+    # get coordinates for the path calculator
+    ireLoc = getCoords $('.ire')
+    targetLoc = getCoords targetObject
+
     # make enemy walkable so path to it can be generated
-    if $( clickedCell ).data().cellType is "enemy"
-      grid.setWalkableAt(target[0], target[1], true);
+    if targetObject.data('cellType') is "enemy"
+      # setWalkable is a pathfinder method
+      grid.setWalkableAt(targetLoc[0], targetLoc[1], true);
 
     finder = new PF.AStarFinder
 
     # 0 is x coordinate (column) and 1 is y coordinate (row)
-    path = finder.findPath ire[0], ire[1], target[0], target[1], grid
+    path = finder.findPath ireLoc[0], ireLoc[1], targetLoc[0], targetLoc[1], grid
+
+  updateDOM = (oldCell, nextCell) ->
+  # Update DOM for old cell
+    # Note oldCell.data('cellType', 'empty') does not set the value in the DOM
+    oldCell
+      .addClass('empty')
+      .removeClass('ire')
+      .attr('data-cell-type', "empty")
+
+    # Update DOM for new cell
+    nextCell
+      .removeClass()
+      .addClass('ire')
+      .attr('data-cell-type', "ire")
 
   moveIre = (path) ->
     for step in path
       coords = step[0] + "-" + step[1]
       oldCell = $('.ire')
       nextCell = $('#' + coords)
-      console.log nextCell
+      updateDOM oldCell, nextCell
 
-      # jQuery.data( '.ire', "cellContent", "empty" );
-      oldCell.data 'cellType', 'field'
-      oldCell.data('cellContent', 'empty')
-      oldCell.addClass('empty')
-      oldCell.removeClass('ire')
-
-      nextCell.removeClass()
-      nextCell.addClass('ire')
-
+  # --- EVENTS --------------------------------------------------
 
   # end location (user click)
   $('td').click ->
-    ire = ireLocation()
-    target = targetLocation this
+    # get actual cell object from clicked cell
+    targetObject = $('#' + this.id)
 
-    path = checkPath ire, target, this
+    path = findPath targetObject
     moveIre path if path.length <= 6 and path.length isnt 0
-    # if path.length <= 6 then console.log "valid"  else console.log "invalid"
-    # console.log path
 
+  # ---- RUN AS SOON AS DOCUMENT LOADS ---------------------------
   map = new Map

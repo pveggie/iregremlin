@@ -5,12 +5,15 @@ RSpec.describe Puzzle, type: :model do
     expect(create(:puzzle)).to be_valid
   end
 
+  it "has a valid factory for 2x2 puzzles" do
+    expect(create(:two_by_two_puzzle)).to be_valid
+  end
+
   let(:valid_puzzle) { build(:puzzle) }
 
   describe "ActiveRecord associations" do
     # Associations
-    it { expect(valid_puzzle).to have_many(:rows).dependent(:destroy) }
-    it { expect(valid_puzzle).to have_many(:cells).through(:rows) }
+    it { expect(valid_puzzle).to have_many(:cells).dependent(:destroy) }
     #it { expect(gallery).to accept_nested_attributes_for(:paintings) }
   end
 end

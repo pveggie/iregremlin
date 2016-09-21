@@ -1,41 +1,34 @@
 require 'rails_helper'
 
 RSpec.describe Cell, type: :model do
-  it "has a valid factory" do
-    expect(create(:cell)).to be_valid
+  it "has a valid factory for cells with puzzle data" do
+    expect(build(:test_cell)).to be_valid
   end
 
-  let(:valid_cell) { build(:cell) }
+  it "has a valid factory for basic cells" do
+    expect(build(:cell)).to be_valid
+  end
+
+  let(:valid_cell) { build(:test_cell) }
 
   describe "ActiveRecord Associations" do
-    it { expect(valid_cell).to belong_to(:row) }
+    it { expect(valid_cell).to belong_to(:puzzle) }
   end
 
   describe "Callbacks" do
     it { expect(valid_cell)
-      .to callback(:set_image)
+      .to callback(:set_type)
       .before(:validation)
-      .if(:image_missing?) }
-
+    }
   end
 
   describe "Instance methods" do
     before(:each) { Cell.destroy_all }
     after(:each) {Cell.destroy_all}
 
-    it "#set_image sets the cell's image to content + '.jpg' if no image is provided" do
-       create(:cell, content: "hello", image: nil)
-       expect(Cell.last.image).to eq("hello.jpg")
-    end
-
-    it "#set_image leaves the cell's image as nil if the content is nil" do
-      create(:cell, content: nil, image: nil)
-      expect(Cell.last.image).to eq(nil)
-    end
-
-    it "#set_image is not called if image is provided" do
-      create(:cell, content: "hello", image: "goodbye.jpg")
-      expect(Cell.last.image).to eq("goodbye.jpg")
+    it "#set_type sets the cell's type" do
+      create(:test_cell, content: "sword")
+      expect(Cell.last.content_type).to eq("enemy")
     end
   end
 end

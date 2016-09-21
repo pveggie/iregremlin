@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920171312) do
+ActiveRecord::Schema.define(version: 20160917141553) do
 
   create_table "cells", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "row_id"
+    t.integer  "puzzle_id"
+    t.integer  "row_number"
     t.integer  "column_number"
-    t.string   "image"
     t.string   "content"
+    t.string   "content_type"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.string   "content_type"
-    t.index ["row_id"], name: "index_cells_on_row_id", using: :btree
+    t.index ["puzzle_id"], name: "index_cells_on_puzzle_id", using: :btree
   end
 
   create_table "puzzles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -31,14 +31,5 @@ ActiveRecord::Schema.define(version: 20160920171312) do
     t.datetime "updated_at",                null: false
   end
 
-  create_table "rows", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "puzzle_id"
-    t.integer  "row_number"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["puzzle_id"], name: "index_rows_on_puzzle_id", using: :btree
-  end
-
-  add_foreign_key "cells", "rows"
-  add_foreign_key "rows", "puzzles"
+  add_foreign_key "cells", "puzzles"
 end

@@ -7,20 +7,19 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 #         1    2     3    4   5    6   7    8    9   10
 Cell.destroy_all
-Row.destroy_all
 Puzzle.destroy_all
 
 rows = [
-  [nil, nil, nil, nil, nil, "axe", "hill", "hill", "hill", "hill"],
-  [nil, nil, "hill", "hill", nil, nil, nil, "hill", "hill", "hill"],
-  ["hill", "hill", "hill", "hill", nil, nil, nil, nil, "hill", "hill"],
-  [nil, nil, "hill", "hill", nil, nil, nil, nil, nil, "hill"],
-  ["hill", nil, nil, nil, nil, nil, nil, nil, nil, nil],
-  ["hill", "hill", nil, nil, "sword", nil, "tree", nil, nil, nil],
-  ["hill", "hill", "hill", "hill", nil, nil, "tree", nil, "lance", nil],
-  ["hill", nil, nil, "ire", nil, nil, nil, nil, nil, nil],
-  ["hill", "hill", nil, nil, nil, nil, nil, nil, nil, nil],
-  ["hill", "hill", nil, nil, nil, nil, nil, nil, nil, nil]
+  ["empty", "empty", "empty", "empty", "empty", "axe", "hill", "hill", "hill", "hill"],
+  ["empty", "empty", "hill", "hill", "empty", "empty", "empty", "hill", "hill", "hill"],
+  ["hill", "hill", "hill", "hill", "empty", "empty", "empty", "empty", "hill", "hill"],
+  ["empty", "empty", "hill", "hill", "empty", "empty", "empty", "empty", "empty", "hill"],
+  ["hill", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+  ["hill", "hill", "empty", "empty", "sword", "empty", "tree", "empty", "empty", "empty"],
+  ["hill", "hill", "hill", "hill", "empty", "empty", "tree", "empty", "lance", "empty"],
+  ["hill", "empty", "empty", "ire", "empty", "empty", "empty", "empty", "empty", "empty"],
+  ["hill", "hill", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+  ["hill", "hill", "empty", "empty", "empty", "empty", "empty", "empty", "empty", "empty"]
 ]
 
 puzzle = Puzzle.create(
@@ -31,10 +30,14 @@ puzzle = Puzzle.create(
 row_number = -1
 
 rows.each do |row|
-  created_row = Row.create(row_number: row_number += 1, puzzle: puzzle)
-
+  row_number += 1
   col_number = -1
   row.each do |cell|
-    Cell.create(column_number: col_number += 1, row: created_row, content: cell)
+    Cell.create(
+      puzzle: puzzle,
+      row_number: row_number,
+      column_number: col_number += 1,
+      content: cell
+  )
   end
 end

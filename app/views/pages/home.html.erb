@@ -9,10 +9,10 @@
 
       <div class="padded bg-white full-height">
         <table class="border-collapse game-grid">
-          <% @puzzle.rows.each do |row| %>
+          <% @puzzle_rows.each do |row| %>
             <tr>
-              <% row.cells.each do |cell| %>
-                <td class="<%= cell.content || "empty" %>" id="<%= cell.column_number %>-<%= row.row_number %>" data-cell-type="<%= cell.content_type %>">
+              <% row.each do |cell| %>
+                <td class="<%= cell.content %>" id="<%= cell.column_number %>-<%= cell.row_number %>" data-cell-type="<%= cell.content_type %>">
                     <div class="highlighter-blue"></div>
                     <div class="highlighter-red"></div>
                 </td>

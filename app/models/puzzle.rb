@@ -6,8 +6,7 @@ class Puzzle < ApplicationRecord
   # == Extensions ===========================================================
 
   # == Relationships ========================================================
-  has_many :rows, dependent: :destroy
-  has_many :cells, through: :rows
+  has_many :cells, dependent: :destroy
   # == Validations ==========================================================
 
   # == Scopes ===============================================================

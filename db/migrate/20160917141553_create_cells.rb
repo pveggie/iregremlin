@@ -1,10 +1,11 @@
 class CreateCells < ActiveRecord::Migration[5.0]
   def change
     create_table :cells do |t|
-      t.references :row, foreign_key: true
+      t.references :puzzle, foreign_key: true, index: true
+      t.integer :row_number
       t.integer :column_number
-      t.string :image
       t.string :content
+      t.string :content_type
 
       t.timestamps
     end

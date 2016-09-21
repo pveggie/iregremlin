@@ -13,6 +13,9 @@
             <tr>
               <% row.cells.each do |cell| %>
                 <td class="<%= cell.content || "empty" %>" id="<%= cell.column_number %>-<%= row.row_number %>" data-cell-type="<%= cell.content_type %>">
+                    <div class="highlighter-blue"></div>
+                    <div class="highlighter-red"></div>
+                </td>
               <% end %>
             </tr>
           <% end %>

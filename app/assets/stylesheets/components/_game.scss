@@ -2,43 +2,69 @@
     margin: 30px auto;
 
   td {
-
-    border: 0.5px solid #72420c;
+    border: 1px solid #AA7538;
     width: 40px;
     height: 40px;
-
-    // /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#8fc400+8,9aa800+100 */
-    background: rgb(143,196,0); /* Old browsers */
-    background: -moz-radial-gradient(center, ellipse cover, rgba(143,196,0,1) 8%, rgba(154,168,0,1) 100%); /* FF3.6-15 */
-    background: -webkit-radial-gradient(center, ellipse cover, rgba(143,196,0,1) 8%,rgba(154,168,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: radial-gradient(ellipse at center, rgba(143,196,0,1) 8%,rgba(154,168,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8fc400', endColorstr='#9aa800',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    position: relative;
   }
 }
 
 // ------------- Backgrounds -------------- //
+.highlighter-blue {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 
-td.tree {
+  z-index: 10;
+  background-color: blue;
+  opacity: 0;
+}
+
+.highlighter-red {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  z-index: 10;
+  background-color: red;
+  opacity: 0;
+}
+
+.empty {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#8fc400+8,9aa800+100 */
+  background: rgb(143,196,0); /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, rgba(143,196,0,1) 8%, rgba(154,168,0,1) 100%); /* FF3.6-15 */
+  background: -webkit-radial-gradient(center, ellipse cover, rgba(143,196,0,1) 8%,rgba(154,168,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: radial-gradient(ellipse at center, rgba(143,196,0,1) 8%,rgba(154,168,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8fc400', endColorstr='#9aa800',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.tree {
   background-image: image-url('tree.jpg');
 }
 
-td.hill {
+.hill {
   background: image-url('hill.jpg');
 }
 
-td.ire {
+.ire {
+  border: 2px solid #540000;
   background-image: image-url('ire.jpg');
 }
 
-td.axe {
+.axe {
   background-image: image-url('axe.jpg');
 }
 
-td.sword {
+.sword {
   background-image: image-url('sword.jpg');
 }
 
-td.lance {
+.lance {
   background-image: image-url('lance.jpg');
 }
 

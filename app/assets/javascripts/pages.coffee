@@ -60,6 +60,9 @@ $(document).ready ->
 
     # 0 is x coordinate (column) and 1 is y coordinate (row)
     path = finder.findPath ireLoc[0], ireLoc[1], targetLoc[0], targetLoc[1], grid
+    # to get rid of the first array element, which is the starting square
+    path.shift()
+    path
 
   updateDOM = (oldCell, nextCell) ->
   # Update DOM for old cell
@@ -82,15 +85,33 @@ $(document).ready ->
       nextCell = $('#' + coords)
       updateDOM oldCell, nextCell
 
-  # --- EVENTS --------------------------------------------------
+  highlightPath = (path) ->
+    highlighter = if path.length <= 5 then '.highlighter-blue' else '.highlighter-red'
+    for step in path
+      coords = step[0] + "-" + step[1]
+      cell = $('#' + coords + " div" + highlighter)
+      cell.css('opacity', 0.5)
 
-  # end location (user click)
+  # --- EVENTS --------------------------------------------------
+  # # Checking paths (hover)
+  $('td').mouseenter ->
+    targetObject = $('#' + this.id)
+
+    path = findPath targetObject
+    highlightPath path if path.length isnt 0
+
+  $('td').mouseleave ->
+    $('.highlighter-blue').css('opacity', 0)
+    $('.highlighter-red').css('opacity', 0)
+
+
+  # Confirm Destination
   $('td').click ->
     # get actual cell object from clicked cell
     targetObject = $('#' + this.id)
 
-    path = findPath targetObject
-    moveIre path if path.length <= 6 and path.length isnt 0
+    path = findPath(targetObject)
+    moveIre path if path.length <= 5 and path.length isnt 0
 
   # ---- RUN AS SOON AS DOCUMENT LOADS ---------------------------
   map = new Map

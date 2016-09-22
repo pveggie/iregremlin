@@ -65,7 +65,7 @@ Teaspoon.configure do |config|
     #suite.hook :fixtures, &proc{}
 
     # Determine whether specs loaded into the test harness should be embedded as individual script tags or concatenated
-    # into a single file. Similar to Rails' asset `debug: true` and `config.assets.debug = true` options. By default, 
+    # into a single file. Similar to Rails' asset `debug: true` and `config.assets.debug = true` options. By default,
     # Teaspoon expands all assets to provide more valuable stack traces that reference individual source files.
     #suite.expand_assets = true
 
@@ -98,7 +98,7 @@ Teaspoon.configure do |config|
   # Selenium Webdriver: https://github.com/modeset/teaspoon/wiki/Using-Selenium-WebDriver
   # BrowserStack Webdriver: https://github.com/modeset/teaspoon/wiki/Using-BrowserStack-WebDriver
   # Capybara Webkit: https://github.com/modeset/teaspoon/wiki/Using-Capybara-Webkit
-  #config.driver = :phantomjs
+  config.driver = :phantomjs
 
   # Specify additional options for the driver.
   #

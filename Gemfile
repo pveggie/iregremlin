@@ -46,9 +46,11 @@ group :development, :test do
   gem 'byebug'
   gem 'spring'
   gem 'spring-commands-rspec'
+  gem 'spring-commands-teaspoon'
 
   # --- Testing Frameworks -------------------------------------
   gem 'rspec-rails', '~> 3.5'
+  gem 'rails-controller-testing'
   # Teaspoon can use phantomjs for headless testing
   # https://github.com/jejacks0n/teaspoon
   gem "teaspoon-jasmine"

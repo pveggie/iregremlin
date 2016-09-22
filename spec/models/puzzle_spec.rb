@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Puzzle, type: :model do
   it "has a valid factory" do
-    expect(create(:puzzle)).to be_valid
+    expect(build(:puzzle)).to be_valid
   end
 
   it "has a valid factory for 2x2 puzzles" do
-    expect(create(:two_by_two_puzzle)).to be_valid
+    expect(build(:two_by_two_puzzle)).to be_valid
   end
 
   let(:valid_puzzle) { build(:puzzle) }
@@ -15,6 +15,35 @@ RSpec.describe Puzzle, type: :model do
     # Associations
     it { expect(valid_puzzle).to have_many(:cells).dependent(:destroy) }
     #it { expect(gallery).to accept_nested_attributes_for(:paintings) }
+  end
+
+  describe "Scopes" do
+    let (:puzzle) { create(:two_by_two_puzzle) }
+
+    describe "#rows" do
+      it "returns two rows for a two by two puzzle" do
+        expect(puzzle.rows.count).to eq(2)
+      end
+
+      it "returns rows with two columns for a two by two puzzle" do
+        expect(puzzle.rows[0].count).to eq(2)
+        expect(puzzle.rows[1].count).to eq(2)
+      end
+
+      it "returns cells in the correct order" do
+        first_cell = puzzle.rows[0][0]
+        expect(first_cell.row_number).to eq(0)
+        expect(first_cell.column_number).to eq(0)
+      end
+
+      it "does not return the cells as a grouping hash" do
+        expect(puzzle.rows.class).to_not equal(Hash)
+      end
+
+      it "returns the cells an array" do
+        expect(puzzle.rows.class).to equal(Array)
+      end
+    end
   end
 end
 

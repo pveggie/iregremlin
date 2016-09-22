@@ -11,6 +11,14 @@ class Puzzle < ApplicationRecord
 
   # == Scopes ===============================================================
 
+  # only after finding a puzzle
+  def rows
+     cells
+      .select('cells.id', :row_number, :column_number, :content, :content_type)
+      .group_by { |cell| cell[:row_number] }
+      .map { |array| array[1] }
+  end
+
   # == Callbacks ============================================================
 
   # == Class Methods ========================================================

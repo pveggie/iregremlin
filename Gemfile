@@ -37,7 +37,6 @@ gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 
 source 'https://rails-assets.org' do
-  gem 'rails-assets-easystarjs'
   gem 'rails-assets-pathfinding'
 end
 

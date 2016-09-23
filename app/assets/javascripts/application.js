@@ -16,5 +16,4 @@
 //= require turbolinks
 //= require_tree .
 //
-//= require easystarjs
 //= require pathfinding

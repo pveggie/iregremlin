@@ -1,3 +1,4 @@
+#= require pages
 describe "Testing", ->
   it "is going so smoothly", ->
     expect(true).toBe true
@@ -8,3 +9,6 @@ describe "Testing", ->
 # describe "getCoords", ->
 #   it "returns an array of column number and row number from an object", ->
 #     expect(getCoords $('.ire')).toBe [1,2]
+  describe "Map", ->
+    it "can make a map", ->
+      map = new Map

@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).ready ->
 
-  class Map
+  class @Map
     # get size of grid and create blank matrix array
     constructor: ->
       numRows = Math.sqrt $('td').length

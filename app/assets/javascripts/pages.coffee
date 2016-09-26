@@ -2,13 +2,13 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-#= require map
+#= require puzzle_map
 
 # Get Ire and Target coordinates for the path calculator
 
 # Note that this requires correct type of object. Object from selector works,
 # object directly from user click does not.
-getCoords = (cellObject) ->
+@getCoords = (cellObject) ->
   coords = cellObject.attr('id').split '-'
   coords.map (coord) ->
     parseInt coord
@@ -66,6 +66,9 @@ highlightPath = (path) ->
     cell.css('opacity', 0.5)
 
 $(document).ready ->
+  # ---- RUN AS SOON AS DOCUMENT LOADS ---------------------------
+  puzzleMap = new PuzzleMap
+
   # --- EVENTS --------------------------------------------------
   # # Checking paths (hover)
   $('td').mouseenter ->
@@ -87,5 +90,4 @@ $(document).ready ->
     path = findPath targetObject, puzzleMap
     moveIre path if path.length <= 5 and path.length isnt 0
 
-  # ---- RUN AS SOON AS DOCUMENT LOADS ---------------------------
-  puzzleMap = new PuzzleMap
+

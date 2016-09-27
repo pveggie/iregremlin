@@ -110,4 +110,18 @@ describe "Pages", ->
       it "sets the new cell's cell-type data to ire", ->
         expect($('#1-1')).toHaveAttr('data-cell-type', 'ire')
 
+    describe "moveIre", ->
+
+      it "moves Ire to the last point on the path", ->
+        path = [[1,1], [1,0]]
+        moveIre path
+        expect($('#1-0')).toHaveClass('ire')
+
+      it "removes path highlighting", ->
+        path = [[1,1], [1,0]]
+        highlightPath path
+        moveIre path
+        expect($('#1-0 div.highlighter-blue').css('opacity')).toBe('0')
+        expect($('#1-0 div.highlighter-red').css('opacity')).toBe('0')
+
 

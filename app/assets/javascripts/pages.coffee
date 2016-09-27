@@ -61,7 +61,10 @@ window.updateDOM = (oldCell, nextCell) ->
     .addClass('ire')
     .attr('data-cell-type', "ire")
 
-moveIre = (path) ->
+window.moveIre = (path) ->
+  $('.highlighter-blue').css('opacity', 0)
+  $('.highlighter-red').css('opacity', 0)
+
   for step in path
     coords = step[0] + "-" + step[1]
     oldCell = $('.ire')
@@ -80,11 +83,11 @@ $(document).ready ->
     targetObject = $('#' + this.id)
 
     path = findPath targetObject, puzzleMap
-    highlightPath path if path.length isnt 0
+    highlightPath path
 
-  # $('td').mouseleave ->
-  #   $('.highlighter-blue').css('opacity', 0)
-  #   $('.highlighter-red').css('opacity', 0)
+  $('table').mouseleave ->
+    $('.highlighter-blue').css('opacity', 0)
+    $('.highlighter-red').css('opacity', 0)
 
 
   # Confirm Destination
@@ -94,5 +97,6 @@ $(document).ready ->
 
     path = findPath targetObject, puzzleMap
     moveIre path if path.length <= 5 and path.length isnt 0
+
 
 

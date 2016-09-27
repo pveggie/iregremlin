@@ -92,23 +92,85 @@ describe "Pages", ->
         newCell = $('#1-1')
         updateDOM oldCell, newCell
 
-      it "removes the ire class from the old cell", ->
-        expect($('#1-2')).not.toHaveClass('ire')
+      describe "oldCell", ->
+        it "removes the ire class from the old cell", ->
+          expect($('#1-2')).not.toHaveClass('ire')
 
-      it "adds the empty class to the old cell", ->
-        expect($('#1-2')).toHaveClass('empty')
+        it "adds the empty class to the old cell", ->
+          expect($('#1-2')).toHaveClass('empty')
 
-      it "sets the old cell's cell-type data to empty", ->
-        expect($('#1-2')).toHaveAttr('data-cell-type', 'empty')
+        it "sets the old cell's cell-type data to empty", ->
+          expect($('#1-2')).toHaveAttr('data-cell-type', 'empty')
 
-      it "adds the ire class to the new cell", ->
-        expect($('#1-1')).toHaveClass('ire')
+      describe "newCell", ->
+        it "adds the ire class to the new cell", ->
+          expect($('#1-1')).toHaveClass('ire')
 
-      it "removes any other classes from the old cell", ->
-        expect($('#1-1')).toHaveAttr('class', 'ire')
+        it "removes any other classes from the old cell", ->
+          expect($('#1-1')).toHaveAttr('class', 'ire')
 
-      it "sets the new cell's cell-type data to ire", ->
-        expect($('#1-1')).toHaveAttr('data-cell-type', 'ire')
+        it "sets the new cell's cell-type data to ire", ->
+          expect($('#1-1')).toHaveAttr('data-cell-type', 'ire')
+
+      describe "moving a weapon-wielding Ire", ->
+        it "sets the old cell class to empty", ->
+          oldCell = $('#1-2')
+          newCell = $('#1-1')
+          oldCell.removeClass().addClass('ire-axe')
+
+          updateDOM oldCell, newCell
+          expect(oldCell).toHaveAttr('class', 'empty')
+
+        it "can set the new cell class to ire-axe", ->
+          oldCell = $('#1-2')
+          newCell = $('#1-1')
+          oldCell.removeClass().addClass('ire-axe')
+
+          updateDOM oldCell, newCell
+          expect(newCell).toHaveAttr('class', 'ire-axe')
+
+        it "can set the new cell class to ire-lance", ->
+          oldCell = $('#1-2')
+          newCell = $('#1-1')
+          oldCell.removeClass().addClass('ire-lance')
+
+          updateDOM oldCell, newCell
+          expect(newCell).toHaveAttr('class', 'ire-lance')
+
+        it "can set the new cell class to ire-sword", ->
+          oldCell = $('#1-2')
+          newCell = $('#1-1')
+          oldCell.removeClass().addClass('ire-sword')
+
+          updateDOM oldCell, newCell
+          expect(newCell).toHaveAttr('class', 'ire-sword')
+
+      describe "stealing enemy weapons", ->
+        it "sets the new cell type to ire-axe after defeating axe", ->
+          oldCell = $('#3-3')
+          newCell = $('#3-2')
+          oldCell.removeClass().addClass('ire-sword')
+
+          updateDOM oldCell, newCell
+          expect(newCell).toHaveAttr('class', 'ire-axe')
+
+        it "sets the new cell type to ire-lance after defeating lance", ->
+          oldCell = $('#3-3')
+          newCell = $('#4-2')
+          oldCell.removeClass().addClass('ire-sword')
+
+          updateDOM oldCell, newCell
+          expect(newCell).toHaveAttr('class', 'ire-lance')
+
+        it "sets the new cell type to ire-sword after defeating sword", ->
+          oldCell = $('#3-0')
+          newCell = $('#3-1')
+          oldCell.removeClass().addClass('ire-lance')
+
+          updateDOM oldCell, newCell
+          expect(newCell).toHaveAttr('class', 'ire-sword')
+
+
 
     describe "moveIre", ->
 

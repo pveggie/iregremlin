@@ -20,9 +20,10 @@ class Cell < ApplicationRecord
   def set_type
     case content
     when "empty" then self.content_type = "empty"
-    when "ire" then self.content_type = "ire"
-    when "hill" || "tree" then self.content_type = "obstacle"
-    else self.content_type = "enemy"
+    when /ire/ then self.content_type = "ire"
+    when /hill|tree/ then self.content_type = "obstacle"
+    when /axe|sword|lance/ then self.content_type = "enemy"
+    else raise "Change type"
     end
   end
 end

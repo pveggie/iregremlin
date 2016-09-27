@@ -21,7 +21,7 @@ window.findPath = (targetObject, puzzleMap) ->
   grid = new PF.Grid filledMatrix
 
   # get coordinates for the path calculator
-  ireLoc = getCoords $('.ire')
+  ireLoc = getCoords $('td[data-cell-type="ire"]')
   targetLoc = getCoords targetObject
 
   # make enemy walkable so path to it can be generated
@@ -50,15 +50,20 @@ window.highlightPath = (path) ->
 window.updateDOM = (oldCell, nextCell) ->
 # Update DOM for old cell
   # Note oldCell.data('cellType', 'empty') does not set the value in the DOM
+  if nextCell.attr('data-cell-type') is 'enemy'
+    ireType = ('ire-' + nextCell.attr('class'))
+  else
+    ireType = oldCell.attr('class')
+
   oldCell
+    .removeClass()
     .addClass('empty')
-    .removeClass('ire')
     .attr('data-cell-type', "empty")
 
   # Update DOM for new cell
   nextCell
     .removeClass()
-    .addClass('ire')
+    .addClass(ireType)
     .attr('data-cell-type', "ire")
 
 window.moveIre = (path) ->
@@ -67,7 +72,7 @@ window.moveIre = (path) ->
 
   for step in path
     coords = step[0] + "-" + step[1]
-    oldCell = $('.ire')
+    oldCell = $('td[data-cell-type="ire"]')
     nextCell = $('#' + coords)
     updateDOM oldCell, nextCell
 

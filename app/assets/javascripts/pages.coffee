@@ -8,13 +8,13 @@
 
 # Note that this requires correct type of object. Object from selector works,
 # object directly from user click does not.
-@getCoords = (cellObject) ->
+window.getCoords = (cellObject) ->
   coords = cellObject.attr('id').split '-'
   coords.map (coord) ->
     parseInt coord
 
 # Use pathfinding library to calculate shortest path, accounting for obstacles
-@findPath = (targetObject, puzzleMap) ->
+window.findPath = (targetObject, puzzleMap) ->
   puzzleMap.updateMatrix()
   filledMatrix = puzzleMap.matrix
 
@@ -37,7 +37,10 @@
   path.shift()
   path
 
-highlightPath = (path) ->
+window.highlightPath = (path) ->
+  $('.highlighter-blue').css('opacity', 0)
+  $('.highlighter-red').css('opacity', 0)
+
   highlighter = if path.length <= 5 then '.highlighter-blue' else '.highlighter-red'
   for step in path
     coords = step[0] + "-" + step[1]
@@ -78,9 +81,9 @@ $(document).ready ->
     path = findPath targetObject, puzzleMap
     highlightPath path if path.length isnt 0
 
-  $('td').mouseleave ->
-    $('.highlighter-blue').css('opacity', 0)
-    $('.highlighter-red').css('opacity', 0)
+  # $('td').mouseleave ->
+  #   $('.highlighter-blue').css('opacity', 0)
+  #   $('.highlighter-red').css('opacity', 0)
 
 
   # Confirm Destination

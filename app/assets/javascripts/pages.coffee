@@ -47,15 +47,7 @@ window.highlightPath = (path) ->
     cell = $('#' + coords + " div" + highlighter)
     cell.css('opacity', 0.5)
 
-
-moveIre = (path) ->
-  for step in path
-    coords = step[0] + "-" + step[1]
-    oldCell = $('.ire')
-    nextCell = $('#' + coords)
-    updateDOM oldCell, nextCell
-
-updateDOM = (oldCell, nextCell) ->
+window.updateDOM = (oldCell, nextCell) ->
 # Update DOM for old cell
   # Note oldCell.data('cellType', 'empty') does not set the value in the DOM
   oldCell
@@ -68,6 +60,15 @@ updateDOM = (oldCell, nextCell) ->
     .removeClass()
     .addClass('ire')
     .attr('data-cell-type', "ire")
+
+moveIre = (path) ->
+  for step in path
+    coords = step[0] + "-" + step[1]
+    oldCell = $('.ire')
+    nextCell = $('#' + coords)
+    updateDOM oldCell, nextCell
+
+
 
 $(document).ready ->
   # ---- RUN AS SOON AS DOCUMENT LOADS ---------------------------

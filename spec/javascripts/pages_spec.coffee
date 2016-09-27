@@ -85,3 +85,29 @@ describe "Pages", ->
         expect($('#1-1 div.highlighter-blue').css('opacity')).toBe('0')
         expect($('#1-1 div.highlighter-red').css('opacity')).toBe('0')
         expect($('#1-3 div.highlighter-blue').css('opacity')).toBe('0.5')
+
+    describe "updateDOM", ->
+      beforeEach ->
+        oldCell = $('#1-2')
+        newCell = $('#1-1')
+        updateDOM oldCell, newCell
+
+      it "removes the ire class from the old cell", ->
+        expect($('#1-2')).not.toHaveClass('ire')
+
+      it "adds the empty class to the old cell", ->
+        expect($('#1-2')).toHaveClass('empty')
+
+      it "sets the old cell's cell-type data to empty", ->
+        expect($('#1-2')).toHaveAttr('data-cell-type', 'empty')
+
+      it "adds the ire class to the new cell", ->
+        expect($('#1-1')).toHaveClass('ire')
+
+      it "removes any other classes from the old cell", ->
+        expect($('#1-1')).toHaveAttr('class', 'ire')
+
+      it "sets the new cell's cell-type data to ire", ->
+        expect($('#1-1')).toHaveAttr('data-cell-type', 'ire')
+
+

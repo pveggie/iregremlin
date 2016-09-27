@@ -2,10 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-#= require puzzle_map
-
 # Get Ire and Target coordinates for the path calculator
-
 # Note that this requires correct type of object. Object from selector works,
 # object directly from user click does not.
 window.getCoords = (cellObject) ->
@@ -37,11 +34,10 @@ window.findPath = (targetObject, puzzleMap) ->
   path.shift()
   path
 
-window.highlightPath = (path) ->
-  $('.highlighter-blue').css('opacity', 0)
-  $('.highlighter-red').css('opacity', 0)
+window.highlightPath = (path, range) ->
+  removeHighlighting()
 
-  highlighter = if path.length <= 5 then '.highlighter-blue' else '.highlighter-red'
+  highlighter = if path.length <= range then '.highlighter-blue' else '.highlighter-red'
   for step in path
     coords = step[0] + "-" + step[1]
     cell = $('#' + coords + " div" + highlighter)
@@ -67,8 +63,7 @@ window.updateDOM = (oldCell, nextCell) ->
     .attr('data-cell-type', "ire")
 
 window.moveIre = (path) ->
-  $('.highlighter-blue').css('opacity', 0)
-  $('.highlighter-red').css('opacity', 0)
+  removeHighlighting()
 
   for step in path
     coords = step[0] + "-" + step[1]
@@ -76,32 +71,38 @@ window.moveIre = (path) ->
     nextCell = $('#' + coords)
     updateDOM oldCell, nextCell
 
+window.removeHighlighting = ->
+  $('.highlighter-blue').css('opacity', 0)
+  $('.highlighter-red').css('opacity', 0)
+
+window.browseMoves = (target, puzzleMap, range) ->
+  targetObject = $('#' + target.id)
+
+  path = findPath targetObject, puzzleMap
+  highlightPath path, range
+
+window.playerMakesMove = (target, puzzleMap, ire) ->
+  # get actual cell object from clicked cell
+    targetObject = $('#' + target.id)
+
+    path = findPath targetObject, puzzleMap
+    moveIre path if path.length <= ire.range and path.length isnt 0
+
+    targetType = targetObject.data('cellType')
+    ire.range = if targetType is 'enemy' then 6 else 5
 
 
 $(document).ready ->
   # ---- RUN AS SOON AS DOCUMENT LOADS ---------------------------
   puzzleMap = new PuzzleMap
+  ire = new Ire
 
   # --- EVENTS --------------------------------------------------
   # # Checking paths (hover)
-  $('td').mouseenter ->
-    targetObject = $('#' + this.id)
-
-    path = findPath targetObject, puzzleMap
-    highlightPath path
-
-  $('table').mouseleave ->
-    $('.highlighter-blue').css('opacity', 0)
-    $('.highlighter-red').css('opacity', 0)
-
+  $('td').on 'mouseenter.userTurn', -> browseMoves this, puzzleMap, ire.range
+  $('table').on 'mouseleave.userTurn', -> removeHighlighting()
 
   # Confirm Destination
-  $('td').click ->
-    # get actual cell object from clicked cell
-    targetObject = $('#' + this.id)
-
-    path = findPath targetObject, puzzleMap
-    moveIre path if path.length <= 5 and path.length isnt 0
-
+  $('td').on 'click.userTurn', -> playerMakesMove this, puzzleMap, ire
 
 

@@ -54,7 +54,7 @@ describe "Pages", ->
     describe "highlightPath", ->
       it "highlights path to reachable spot in blue", ->
         path = [[1,1], [1,0], [2,0], [3,0], [3,1]]
-        highlightPath path
+        highlightPath path, 5
         steps = ["1-1", "1-0", "2-0", "3-0", "3-1"]
         for cell in steps
           blueHighlighter = $('#' + cell + " div.highlighter-blue")
@@ -64,7 +64,7 @@ describe "Pages", ->
 
       it "highlights path to unreachable spot in red", ->
         path = [[1,1], [1,0], [2,0], [3,0], [4,0], [4,1]]
-        highlightPath path
+        highlightPath path, 5
         steps = ["1-1", "1-0", "2-0", "3-0", "4-0", "4-1"]
         for cell in steps
           blueHighlighter = $('#' + cell + " div.highlighter-blue")
@@ -80,7 +80,7 @@ describe "Pages", ->
           [[1,3]]
         ]
 
-        highlightPath path for path in paths
+        highlightPath path, 5 for path in paths
 
         expect($('#1-1 div.highlighter-blue').css('opacity')).toBe('0')
         expect($('#1-1 div.highlighter-red').css('opacity')).toBe('0')
@@ -170,10 +170,7 @@ describe "Pages", ->
           updateDOM oldCell, newCell
           expect(newCell).toHaveAttr('class', 'ire-sword')
 
-
-
     describe "moveIre", ->
-
       it "moves Ire to the last point on the path", ->
         path = [[1,1], [1,0]]
         moveIre path
@@ -186,4 +183,69 @@ describe "Pages", ->
         expect($('#1-0 div.highlighter-blue').css('opacity')).toBe('0')
         expect($('#1-0 div.highlighter-red').css('opacity')).toBe('0')
 
+    describe "removeHighlighting", ->
+      it "removes any red highlighting", ->
+        redHighlighter = $('#3-0 div.highlighter-red')
+        redHighlighter.css('opacity', '0.5')
 
+        removeHighlighting()
+        expect(redHighlighter.css('opacity')).toBe('0')
+
+      it "removes any blue highlighting", ->
+        blueHighlighter = $('#3-0 div.highlighter-blue')
+        blueHighlighter.css('opacity', '0.5')
+
+        removeHighlighting()
+        expect(blueHighlighter.css('opacity')).toBe('0')
+
+    describe "browseMoves", ->
+      it "highlights paths based on where mouse hovers", ->
+        map = new PuzzleMap
+        target = document.getElementById('1-1')
+
+        browseMoves target, map, 5
+        expect($('#1-1 div.highlighter-blue').css('opacity')).toBe('0.5')
+
+    describe "playerMakesMove", ->
+      describe "Moving ire", ->
+        it "moves ire when the user clicks on a valid and reachable target", ->
+          map = new PuzzleMap
+          ire = new Ire
+          target = document.getElementById('4-0')
+
+          playerMakesMove target, map, ire
+          expect($('#4-0')).toHaveClass('ire')
+
+        it "does not move ire when the target is too far away", ->
+          map = new PuzzleMap
+          ire = new Ire
+          target = document.getElementById('4-1')
+
+          playerMakesMove target, map, ire
+          expect($('#4-1')).not.toHaveClass('ire')
+
+        it "does not move ire to an invalid target", ->
+          map = new PuzzleMap
+          ire = new Ire
+          target = document.getElementById('2-2')
+
+          playerMakesMove target, map, ire
+          expect($('#2-2')).not.toHaveClass('ire')
+
+      describe "Updating the movement range", ->
+        it "increases ire's movement range to 6 after Ire defeats an enemy", ->
+          map = new PuzzleMap
+          ire = new Ire
+          target = document.getElementById('3-1')
+
+          playerMakesMove target, map, ire
+          expect(ire.range).toBe(6)
+
+        it "sets ire's movement range to 5 if Ire moves to non-enemy square", ->
+          map = new PuzzleMap
+          ire = new Ire
+          ire.range = 6
+          target = document.getElementById('3-0')
+
+          playerMakesMove target, map, ire
+          expect(ire.range).toBe(5)

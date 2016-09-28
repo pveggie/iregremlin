@@ -75,13 +75,13 @@ window.removeHighlighting = ->
   $('.highlighter-blue').css('opacity', 0)
   $('.highlighter-red').css('opacity', 0)
 
-window.browseMoves = (target, puzzleMap, range) ->
+window.playerBrowsing = (target, puzzleMap, range) ->
   targetObject = $('#' + target.id)
 
   path = findPath targetObject, puzzleMap
   highlightPath path, range
 
-window.playerMakesMove = (target, puzzleMap, ire) ->
+window.playerMove = (target, puzzleMap, ire) ->
   # get actual cell object from clicked cell
     targetObject = $('#' + target.id)
 
@@ -99,10 +99,10 @@ $(document).ready ->
 
   # --- EVENTS --------------------------------------------------
   # # Checking paths (hover)
-  $('td').on 'mouseenter.userTurn', -> browseMoves this, puzzleMap, ire.range
+  $('td').on 'mouseenter.userTurn', -> plazerBrowsing this, puzzleMap, ire.range
   $('table').on 'mouseleave.userTurn', -> removeHighlighting()
 
   # Confirm Destination
-  $('td').on 'click.userTurn', -> playerMakesMove this, puzzleMap, ire
+  $('td').on 'click.userTurn', -> playerMove this, puzzleMap, ire
 
 

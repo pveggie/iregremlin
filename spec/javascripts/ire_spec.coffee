@@ -1,12 +1,14 @@
 describe "Ire", ->
+  ire = null
+
+  beforeEach ->
+    ire = new Ire
 
   describe "Ire#constructor", ->
     it "gives Ire an initial movement range of 5", ->
-      ire = new Ire
       expect(ire.range).toBe(5)
 
     it "gives Ire an initial HP of 20", ->
-      ire = new Ire
       expect(ire.hp).toBe(20)
 
   # describe "Ire#increaseRange", ->

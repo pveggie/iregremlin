@@ -83,13 +83,16 @@ window.playerBrowsing = (target, puzzleMap, range) ->
 
 window.playerMove = (target, puzzleMap, ire) ->
   # get actual cell object from clicked cell
-    targetObject = $('#' + target.id)
+  targetObject = $('#' + target.id)
+  enemy = if targetObject.data('cellType') is "enemy" then true else false
 
-    path = findPath targetObject, puzzleMap
-    moveIre path if path.length <= ire.range and path.length isnt 0
+  path = findPath targetObject, puzzleMap
+  moveIre path if path.length <= ire.range and path.length isnt 0
 
-    targetType = targetObject.data('cellType')
-    ire.range = if targetType is 'enemy' then 6 else 5
+  ire.fightEnemy targetObject if enemy
+
+  targetType = targetObject.data('cellType')
+  ire.range = if targetType is 'enemy' then 6 else 5
 
 
 $(document).ready ->

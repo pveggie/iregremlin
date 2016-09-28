@@ -242,3 +242,26 @@ describe "Pages", ->
 
           playerMove target, map, ire
           expect(ire.range).toBe(5)
+
+      describe "Fighting enemy", ->
+        fightEnemy = null
+
+        beforeEach ->
+          ire =
+            fightEnemy: (target, ire) ->
+          spyOn(ire, 'fightEnemy')
+
+        it "calls the fightEnemy method when target is an enemy", ->
+          target = document.getElementById('3-1')
+          playerMove target, map, ire
+
+          # window.fightEnemy()
+          expect(ire.fightEnemy).toHaveBeenCalled()
+
+        it "does not call the fightEnemy method when target is not an enemy", ->
+          target = document.getElementById('3-0')
+          playerMove target, map, ire
+
+          expect(ire.fightEnemy).not.toHaveBeenCalled()
+
+

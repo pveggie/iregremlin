@@ -1,17 +1,16 @@
-class @PuzzleMap
-  # get size of grid and create blank matrix array
+class @Puzzle
   constructor: ->
-    numRows = Math.sqrt $('td').length
+    @turn = 1
     # Assuming all maps are square
-    @matrix = new Array(numRows)
+    numRows = Math.sqrt $('td').length
+    @walkable = new Array(numRows)
     for num in [0...numRows]
-      @matrix[num] = new Array(numRows)
+      @walkable[num] = new Array(numRows)
 
-  # update grid to reflect walkable and non-walkable cells
-  updateMatrix: ->
+  updateWalkable: ->
     # Define matrix for use in iterator becuase in the iterator
     # 'this/@' is the td rather than the puzzle object
-    matrix = @matrix
+    walkable = @walkable
 
     $('td').each ->
       # td objects are different from the ones obtained with class
@@ -22,5 +21,4 @@ class @PuzzleMap
       row = parseInt coords[1]
 
       type = @dataset.cellType
-      matrix[row][col] = if type is "empty" then 0 else 1
-
+      walkable[row][col] = if type is "empty" then 0 else 1

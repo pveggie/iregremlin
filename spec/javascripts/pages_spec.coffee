@@ -1,5 +1,5 @@
 describe "Pages", ->
-  map = null
+  puzzle = null
   ire = null
 
   beforeEach ->
@@ -15,34 +15,34 @@ describe "Pages", ->
     # ---------------------------------------------------------------
     describe "findPath", ->
       beforeEach ->
-        map = new PuzzleMap
+        puzzle = new Puzzle
 
       it "returns an array of steps for a walkable target", ->
         # Ire is in 1-2, so this is two step away
         target = $('#1-0')
-        expect(findPath target, map).toEqual(
+        expect(findPath target, puzzle).toEqual(
           [ [1,1], [1,0] ]
         )
 
       it "returns a blank array for a non-walkable target", ->
         target = $('#2-2')
-        expect(findPath target, map).toEqual([])
+        expect(findPath target, puzzle).toEqual([])
 
       it "accounts for obstacles", ->
         target = $('#4-1')
-        expect(findPath target, map).toEqual(
+        expect(findPath target, puzzle).toEqual(
           [ [1,1], [1,0], [2,0], [3,0], [4,0], [4,1] ]
         )
 
       it "allows a target enemy to be walkable", ->
         target = $('#3-1')
-        expect(findPath target, map).toEqual(
+        expect(findPath target, puzzle).toEqual(
           [ [1,1], [1,0], [2,0], [3,0], [3,1] ]
         )
 
       it "does not allow non-target enemies to be walkable", ->
         target = $('#3-3')
-        expect(findPath target, map).toEqual([])
+        expect(findPath target, puzzle).toEqual([])
 
     # ---------------------------------------------------------------
     describe "highlightPath", ->
@@ -198,49 +198,49 @@ describe "Pages", ->
     # ---------------------------------------------------------------
     describe "playerBrowsing", ->
       it "highlights paths based on where mouse hovers", ->
-        map = new PuzzleMap
+        puzzle = new Puzzle
         target = document.getElementById('1-1')
 
-        playerBrowsing target, map, 5
+        playerBrowsing target, puzzle, 5
         expect($('#1-1 div.highlighter-blue').css('opacity')).toBe('0.5')
 
     # ---------------------------------------------------------------
     describe "playerMove", ->
       beforeEach ->
-        map = new PuzzleMap
+        puzzle = new Puzzle
         ire = new Ire
 
       describe "Moving ire", ->
         it "moves ire when the user clicks on a valid and reachable target", ->
           target = document.getElementById('4-0')
 
-          playerMove target, map, ire
+          playerMove target, puzzle, ire
           expect($('#4-0')).toHaveClass('ire')
 
         it "does not move ire when the target is too far away", ->
           target = document.getElementById('4-1')
 
-          playerMove target, map, ire
+          playerMove target, puzzle, ire
           expect($('#4-1')).not.toHaveClass('ire')
 
         it "does not move ire to an invalid target", ->
           target = document.getElementById('2-2')
 
-          playerMove target, map, ire
+          playerMove target, puzzle, ire
           expect($('#2-2')).not.toHaveClass('ire')
 
       describe "Updating the movement range", ->
         it "increases ire's movement range to 6 after Ire defeats an enemy", ->
           target = document.getElementById('3-1')
 
-          playerMove target, map, ire
+          playerMove target, puzzle, ire
           expect(ire.range).toBe(6)
 
         it "sets ire's movement range to 5 if Ire moves to non-enemy square", ->
           ire.range = 6
           target = document.getElementById('3-0')
 
-          playerMove target, map, ire
+          playerMove target, puzzle, ire
           expect(ire.range).toBe(5)
 
       describe "Fighting enemy", ->
@@ -253,14 +253,14 @@ describe "Pages", ->
 
         it "calls the fightEnemy method when target is an enemy", ->
           target = document.getElementById('3-1')
-          playerMove target, map, ire
+          playerMove target, puzzle, ire
 
           # window.fightEnemy()
           expect(ire.fightEnemy).toHaveBeenCalled()
 
         it "does not call the fightEnemy method when target is not an enemy", ->
           target = document.getElementById('3-0')
-          playerMove target, map, ire
+          playerMove target, puzzle, ire
 
           expect(ire.fightEnemy).not.toHaveBeenCalled()
 

@@ -11,11 +11,11 @@ window.getCoords = (cellObject) ->
     parseInt coord
 
 # Use pathfinding library to calculate shortest path, accounting for obstacles
-window.findPath = (targetObject, puzzleMap) ->
-  puzzleMap.updateMatrix()
-  filledMatrix = puzzleMap.matrix
+window.findPath = (targetObject, puzzle) ->
+  puzzle.updateWalkable()
+  walkabilityMatrix = puzzle.walkable
 
-  grid = new PF.Grid filledMatrix
+  grid = new PF.Grid walkabilityMatrix
 
   # get coordinates for the path calculator
   ireLoc = getCoords $('td[data-cell-type="ire"]')
@@ -75,18 +75,18 @@ window.removeHighlighting = ->
   $('.highlighter-blue').css('opacity', 0)
   $('.highlighter-red').css('opacity', 0)
 
-window.playerBrowsing = (target, puzzleMap, range) ->
+window.playerBrowsing = (target, puzzle, range) ->
   targetObject = $('#' + target.id)
 
-  path = findPath targetObject, puzzleMap
+  path = findPath targetObject, puzzle
   highlightPath path, range
 
-window.playerMove = (target, puzzleMap, ire) ->
+window.playerMove = (target, puzzle, ire) ->
   # get actual cell object from clicked cell
   targetObject = $('#' + target.id)
   enemy = if targetObject.data('cellType') is "enemy" then true else false
 
-  path = findPath targetObject, puzzleMap
+  path = findPath targetObject, puzzle
   moveIre path if path.length <= ire.range and path.length isnt 0
 
   ire.fightEnemy targetObject if enemy
@@ -97,15 +97,15 @@ window.playerMove = (target, puzzleMap, ire) ->
 
 $(document).ready ->
   # ---- RUN AS SOON AS DOCUMENT LOADS ---------------------------
-  puzzleMap = new PuzzleMap
+  puzzle = new Puzzle
   ire = new Ire
 
   # --- EVENTS --------------------------------------------------
   # # Checking paths (hover)
-  $('td').on 'mouseenter.userTurn', -> plazerBrowsing this, puzzleMap, ire.range
+  $('td').on 'mouseenter.userTurn', -> plazerBrowsing this, puzzle, ire.range
   $('table').on 'mouseleave.userTurn', -> removeHighlighting()
 
   # Confirm Destination
-  $('td').on 'click.userTurn', -> playerMove this, puzzleMap, ire
+  $('td').on 'click.userTurn', -> playerMove this, puzzle, ire
 
 

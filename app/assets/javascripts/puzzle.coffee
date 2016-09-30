@@ -76,11 +76,11 @@ class @Puzzle
 
   # -- Class Methods for changing DOM -------------------------------
 
-  @domRemoveHighlighting = ->
+  @domRemoveHighlighting: ->
     $('.highlighter-blue').css('opacity', 0)
     $('.highlighter-red').css('opacity', 0)
 
-  @domHighlightPath = (path, range) ->
+  @domHighlightPath: (path, range) ->
     Puzzle.domRemoveHighlighting()
 
     highlighter = if path.length <= range then '.highlighter-blue' else '.highlighter-red'
@@ -88,3 +88,22 @@ class @Puzzle
       coords = step[0] + "-" + step[1]
       cell = $('#' + coords + " div" + highlighter)
       cell.css('opacity', 0.5)
+
+  @domUpdateIreLocation: (oldCell, nextCell) ->
+    # Note oldCell.data('cellType', 'empty') does not set the value in the DOM
+    if nextCell.attr('data-cell-type') is 'enemy'
+      ireType = ('ire-' + nextCell.attr('class'))
+    else
+      ireType = oldCell.attr('class')
+
+    # Update DOM for old cell
+    oldCell
+      .removeClass()
+      .addClass('empty')
+      .attr('data-cell-type', "empty")
+
+    # Update DOM for new cell
+    nextCell
+      .removeClass()
+      .addClass(ireType)
+      .attr('data-cell-type', "ire")

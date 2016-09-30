@@ -89,39 +89,130 @@ describe "Puzzle", ->
 
         Puzzle.domRemoveHighlighting()
         expect(blueHighlighter.css('opacity')).toBe('0')
-      # ---------------------------------------------------------------
-      describe "Puzzle@domHighlightPath", ->
 
-        it "highlights path to reachable spot in blue", ->
-          path = [[1,1], [1,0], [2,0], [3,0], [3,1]]
-          Puzzle.domHighlightPath path, 5
-          steps = ["1-1", "1-0", "2-0", "3-0", "3-1"]
-          for cell in steps
-            blueHighlighter = $('#' + cell + " div.highlighter-blue")
-            redHighlighter = $('#' + cell + " div.highlighter-red")
-            expect(blueHighlighter.css('opacity')).toBe('0.5')
-            expect(redHighlighter.css('opacity')).toBe('0')
+    # ---------------------------------------------------------------
+    describe "Puzzle@domHighlightPath", ->
+      ire = {}
+      range = null
 
-        it "highlights path to unreachable spot in red", ->
-          path = [[1,1], [1,0], [2,0], [3,0], [4,0], [4,1]]
-          Puzzle.domHighlightPath path, 5
-          steps = ["1-1", "1-0", "2-0", "3-0", "4-0", "4-1"]
-          for cell in steps
-            blueHighlighter = $('#' + cell + " div.highlighter-blue")
-            redHighlighter = $('#' + cell + " div.highlighter-red")
-            expect(blueHighlighter.css('opacity')).toBe('0')
-            expect(redHighlighter.css('opacity')).toBe('0.5')
+      beforeEach ->
+        ire.range = 5
+
+      it "highlights path to reachable spot in blue", ->
+        path = [[1,1], [1,0], [2,0], [3,0], [3,1]]
+        Puzzle.domHighlightPath path, ire.range
+        steps = ["1-1", "1-0", "2-0", "3-0", "3-1"]
+        for cell in steps
+          blueHighlighter = $('#' + cell + " div.highlighter-blue")
+          redHighlighter = $('#' + cell + " div.highlighter-red")
+          expect(blueHighlighter.css('opacity')).toBe('0.5')
+          expect(redHighlighter.css('opacity')).toBe('0')
+
+      it "highlights path to unreachable spot in red", ->
+        path = [[1,1], [1,0], [2,0], [3,0], [4,0], [4,1]]
+        Puzzle.domHighlightPath path, ire.range
+        steps = ["1-1", "1-0", "2-0", "3-0", "4-0", "4-1"]
+        for cell in steps
+          blueHighlighter = $('#' + cell + " div.highlighter-blue")
+          redHighlighter = $('#' + cell + " div.highlighter-red")
+          expect(blueHighlighter.css('opacity')).toBe('0')
+          expect(redHighlighter.css('opacity')).toBe('0.5')
 
 
-        it "unhighlights previously highlighted cells when the path changes", ->
-          paths = [
-            [[1,1], [1,0], [2,0], [3,0], [4,0], [4,1]],
-            [[1,1]],
-            [[1,3]]
-          ]
+      it "unhighlights previously highlighted cells when the path changes", ->
+        paths = [
+          [[1,1], [1,0], [2,0], [3,0], [4,0], [4,1]],
+          [[1,1]],
+          [[1,3]]
+        ]
 
-          Puzzle.domHighlightPath path, 5 for path in paths
+        Puzzle.domHighlightPath path, ire.range for path in paths
 
-          expect($('#1-1 div.highlighter-blue').css('opacity')).toBe('0')
-          expect($('#1-1 div.highlighter-red').css('opacity')).toBe('0')
-          expect($('#1-3 div.highlighter-blue').css('opacity')).toBe('0.5')
+        expect($('#1-1 div.highlighter-blue').css('opacity')).toBe('0')
+        expect($('#1-1 div.highlighter-red').css('opacity')).toBe('0')
+        expect($('#1-3 div.highlighter-blue').css('opacity')).toBe('0.5')
+
+    # ---------------------------------------------------------------
+    describe "domUpdateIreLocation", ->
+      oldCell = null
+      newCell = null
+
+      beforeEach ->
+        oldCell = $('#1-2')
+        newCell = $('#1-1')
+
+      describe "oldCell", ->
+        beforeEach ->
+          Puzzle.domUpdateIreLocation oldCell, newCell
+
+        it "removes the ire class from the old cell", ->
+          expect(oldCell).not.toHaveClass('ire')
+
+        it "adds the empty class to the old cell", ->
+          expect(oldCell).toHaveClass('empty')
+
+        it "sets the old cell's cell-type data to empty", ->
+          expect(oldCell).toHaveAttr('data-cell-type', 'empty')
+
+      describe "newCell", ->
+        beforeEach ->
+          Puzzle.domUpdateIreLocation oldCell, newCell
+
+        it "adds the ire class to the new cell", ->
+          expect(newCell).toHaveClass('ire')
+
+        it "removes any other classes from the old cell", ->
+          expect(newCell).toHaveAttr('class', 'ire')
+
+        it "sets the new cell's cell-type data to ire", ->
+          expect(newCell).toHaveAttr('data-cell-type', 'ire')
+
+      describe "moving a weapon-wielding Ire", ->
+        it "sets the old cell class to empty", ->
+          oldCell.removeClass().addClass('ire-axe')
+          Puzzle.domUpdateIreLocation oldCell, newCell
+
+          expect(oldCell).toHaveAttr('class', 'empty')
+
+        it "can set the new cell class to ire-axe", ->
+          oldCell.removeClass().addClass('ire-axe')
+          Puzzle.domUpdateIreLocation oldCell, newCell
+
+          expect(newCell).toHaveAttr('class', 'ire-axe')
+
+        it "can set the new cell class to ire-lance", ->
+          oldCell.removeClass().addClass('ire-lance')
+          Puzzle.domUpdateIreLocation oldCell, newCell
+
+          expect(newCell).toHaveAttr('class', 'ire-lance')
+
+        it "can set the new cell class to ire-sword", ->
+          oldCell.removeClass().addClass('ire-sword')
+          Puzzle.domUpdateIreLocation oldCell, newCell
+
+          expect(newCell).toHaveAttr('class', 'ire-sword')
+
+      describe "stealing enemy weapons", ->
+        it "sets the new cell type to ire-axe after defeating axe", ->
+          oldCell = $('#3-3')
+          newCell = $('#3-2')
+          oldCell.removeClass().addClass('ire-sword')
+
+          Puzzle.domUpdateIreLocation oldCell, newCell
+          expect(newCell).toHaveAttr('class', 'ire-axe')
+
+        it "sets the new cell type to ire-lance after defeating lance", ->
+          oldCell = $('#3-3')
+          newCell = $('#4-2')
+          oldCell.removeClass().addClass('ire-sword')
+
+          Puzzle.domUpdateIreLocation oldCell, newCell
+          expect(newCell).toHaveAttr('class', 'ire-lance')
+
+        it "sets the new cell type to ire-sword after defeating sword", ->
+          oldCell = $('#3-0')
+          newCell = $('#3-1')
+          oldCell.removeClass().addClass('ire-lance')
+
+          Puzzle.domUpdateIreLocation oldCell, newCell
+          expect(newCell).toHaveAttr('class', 'ire-sword')

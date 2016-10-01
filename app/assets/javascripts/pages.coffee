@@ -8,10 +8,10 @@ $(document).ready ->
 
   # --- EVENTS --------------------------------------------------
   # # Checking paths (hover)
-  $('td').on 'mouseenter.userTurn', -> Player.browsing this, puzzle, ire.range
+  $('td').on 'mouseenter.userTurn', -> Player.browseMoves this, puzzle, ire.range
   $('table').on 'mouseleave.userTurn', -> Puzzle.domRemoveHighlighting()
 
   # Confirm Destination
-  $('td').on 'click.userTurn', -> Player.move this, puzzle, ire
+  $('td').on 'click.userTurn', -> Player.makeMove this, puzzle, ire
 
 

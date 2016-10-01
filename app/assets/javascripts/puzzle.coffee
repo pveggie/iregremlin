@@ -86,6 +86,7 @@ class @Puzzle
     highlighter = if path.length <= range then '.highlighter-blue' else '.highlighter-red'
     for step in path
       coords = step[0] + "-" + step[1]
+      # e.g. $('#1-1 div.highlighter-red').css('opacity', 0.5)
       cell = $('#' + coords + " div" + highlighter)
       cell.css('opacity', 0.5)
 

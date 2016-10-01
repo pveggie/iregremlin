@@ -1,8 +1,7 @@
 class @Ire
   range: 5
   hp: 20
-
-  fightEnemy: (target) ->
+  weapon: null
 
   move: (path) ->
     Puzzle.domRemoveHighlighting()
@@ -12,3 +11,7 @@ class @Ire
       oldCell = $('td[data-cell-type="ire"]')
       nextCell = $('#' + coords)
       Puzzle.domUpdateIreLocation oldCell, nextCell
+
+  fightEnemy: (target) ->
+    oldCell = $('td[data-cell-type="ire"]')
+    Puzzle.domUpdateIreLocation oldCell, target

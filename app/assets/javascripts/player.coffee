@@ -9,12 +9,21 @@ class @Player
   @makeMove: (target, puzzle, ire) ->
     # get actual cell object from clicked cell
     targetObject = $('#' + target.id)
-    enemy = if targetObject.data('cellType') is "enemy" then true else false
+    enemyTarget = false
+    reachableTarget = false
 
     path = puzzle.getPath targetObject
-    ire.move path if path.length <= ire.range and path.length isnt 0
+    enemyTarget = true if targetObject.data('cellType') is "enemy"
+    reachableTarget = true if path.length <= ire.range and path.length isnt 0
 
-    ire.fightEnemy targetObject if enemy
-
-    targetType = targetObject.data('cellType')
-    ire.range = if targetType is 'enemy' then 6 else 5
+    if enemyTarget and reachableTarget
+      # ire moves to the space before the enemy then attacks
+      # then moves on to enemy square
+      finalLoc = path.pop()
+      ire.move path
+      ire.fightEnemy targetObject
+      ire.range = 6
+    else if reachableTarget and not enemyTarget
+      ire.move path
+      ire.range = 5
+      # end turn

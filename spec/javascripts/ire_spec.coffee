@@ -15,14 +15,32 @@ describe "Ire", ->
   describe "methods", ->
     # ---------------------------------------------------------------
     describe "ire#move", ->
-      it "moves Ire along the path", ->
+      path = []
+
+      beforeEach ->
         path = [[1,1], [1,0]]
+
+      it "moves Ire along the path", ->
         ire.move path
         expect($('#1-0')).toHaveClass('ire')
 
       it "removes path highlighting", ->
-        path = [[1,1], [1,0]]
         Puzzle.domHighlightPath path
         ire.move path
         expect($('#1-0 div.highlighter-blue').css('opacity')).toBe('0')
         expect($('#1-0 div.highlighter-red').css('opacity')).toBe('0')
+
+      it "calls the Puzzle@domUpdateIreLocation method", ->
+        spyOn(Puzzle, 'domUpdateIreLocation')
+
+        ire.move path
+        expect(Puzzle.domUpdateIreLocation).toHaveBeenCalled()
+
+      it "calls the domUpdate method for every step", ->
+        spyOn(Puzzle, 'domUpdateIreLocation')
+
+        ire.move path
+        expect(Puzzle.domUpdateIreLocation.calls.count()).toBe(2)
+
+
+

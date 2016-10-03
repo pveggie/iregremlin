@@ -19,7 +19,7 @@ class @Player
     if enemyTarget and reachableTarget
       # ire moves to the space before the enemy then attacks
       # then moves on to enemy square
-      finalLoc = path.pop()
+      path.pop()
       ire.move path
       ire.fightEnemy targetObject
       ire.range = 6

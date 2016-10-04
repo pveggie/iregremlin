@@ -76,6 +76,11 @@ group :development do
   gem 'web-console', '~> 2.0'
 end
 
+group :production do
+  gem 'rails_12factor'
+end
+ruby '2.3.0'
+
 # From another project
 
 # gem 'puma'
@@ -102,8 +107,4 @@ end
 # group :test do
 #   gem 'guard-rspec', require: false
 #   gem 'launchy'
-# end
-
-# group :production do
-#   gem 'rails_12factor'
 # end

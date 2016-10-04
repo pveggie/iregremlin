@@ -1,8 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe Puzzle, type: :model do
-  it "has a valid factory" do
-    expect(build(:puzzle)).to be_valid
+  describe "Factories" do
+    it "has a valid generic factory" do
+      expect(build(:puzzle)).to be_valid
+    end
+
+    it "has a factory for two by two puzzles" do
+      expect(build(:two_by_two_puzzle)).to be_valid
+    end
+
+    it "has a factory for two enemy puzzles" do
+      expect(build(:two_enemy_puzzle)).to be_valid
+    end
   end
 
   it "has a valid factory for 2x2 puzzles" do
@@ -17,7 +27,7 @@ RSpec.describe Puzzle, type: :model do
     #it { expect(gallery).to accept_nested_attributes_for(:paintings) }
   end
 
-  describe "Scopes" do
+  describe "Scopes:" do
     let (:puzzle) { create(:two_by_two_puzzle) }
 
     describe "#rows" do
@@ -43,6 +53,17 @@ RSpec.describe Puzzle, type: :model do
       it "returns the cells an array" do
         expect(puzzle.rows.class).to equal(Array)
       end
+    end
+  end
+
+  describe "Callbacks" do
+    it { expect(valid_puzzle).to callback(:calculate_enemies).before(:create) }
+  end
+
+  describe "Instance methods" do
+    it "#calculate_enemies sets the number of enemies in the puzzle" do
+      create(:two_enemy_puzzle)
+      expect(Puzzle.last.enemies).to eq(2)
     end
   end
 end

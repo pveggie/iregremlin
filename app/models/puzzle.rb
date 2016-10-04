@@ -10,7 +10,6 @@ class Puzzle < ApplicationRecord
   # == Validations ==========================================================
 
   # == Scopes ===============================================================
-
   # only after finding a puzzle
   def rows
      cells
@@ -20,9 +19,13 @@ class Puzzle < ApplicationRecord
   end
 
   # == Callbacks ============================================================
-
+  before_create :calculate_enemies
   # == Class Methods ========================================================
 
   # == Instance Methods =====================================================
+  private
+  def calculate_enemies
+    self.enemies = cells.select { |cell| cell.content_type == "enemy" }.count
+  end
 end
 

@@ -22,8 +22,13 @@ class @Player
       path.pop()
       ire.move path
       ire.fightEnemy targetObject
+
       ire.range = 6
+      puzzle.enemies -= 1
+
     else if reachableTarget and not enemyTarget
       ire.move path
       ire.range = 5
-      # end turn
+      puzzle.round += 1
+
+    puzzle.domUpdatePuzzleInfo ire

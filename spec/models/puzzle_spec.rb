@@ -57,7 +57,10 @@ RSpec.describe Puzzle, type: :model do
   end
 
   describe "Callbacks" do
-    it { expect(valid_puzzle).to callback(:calculate_enemies).before(:create) }
+    it { expect(valid_puzzle)
+      .to callback(:calculate_enemies)
+      .after(:validation)
+      .on(:create) }
   end
 
   describe "Instance methods" do

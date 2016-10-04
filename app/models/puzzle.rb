@@ -19,7 +19,7 @@ class Puzzle < ApplicationRecord
   end
 
   # == Callbacks ============================================================
-  before_create :calculate_enemies
+  after_validation :calculate_enemies, on: [:create]
   # == Class Methods ========================================================
 
   # == Instance Methods =====================================================

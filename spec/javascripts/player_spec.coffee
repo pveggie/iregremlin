@@ -2,9 +2,14 @@ describe "Player", ->
   puzzle = null
   ire = null
 
+  swordEnemy = null
+  validBlank = null
+
   beforeEach ->
     # 25 cells, 5 rows, 5 columns
     fixture.load("puzzle.html")
+    swordEnemy = document.getElementById('3-1')
+    validBlank = document.getElementById('4-0')
 
   describe "Methods", ->
     # ---------------------------------------------------------------
@@ -26,13 +31,13 @@ describe "Player", ->
 
         it "calls the ire.move method", ->
           spyOn(ire, 'move')
-          target = document.getElementById('4-0')
+          target = validBlank
 
           Player.makeMove target, puzzle, ire
           expect(ire.move).toHaveBeenCalled
 
         it "moves ire when the user clicks on a valid and reachable target", ->
-          target = document.getElementById('4-0')
+          target = validBlank
 
           Player.makeMove target, puzzle, ire
           expect($('#4-0')).toHaveClass('ire')
@@ -50,24 +55,11 @@ describe "Player", ->
           expect($('#2-2')).not.toHaveClass('ire')
 
         it "ultimate moves ire onto enemy square when attacking and enemy", ->
-          target = document.getElementById('3-1')
+          target = swordEnemy
 
           Player.makeMove target, puzzle, ire
           expect($('#3-1')).toHaveClass('ire-sword')
 
-      describe "Updating the movement range", ->
-        it "increases ire's movement range to 6 after Ire defeats an enemy", ->
-          target = document.getElementById('3-1')
-
-          Player.makeMove target, puzzle, ire
-          expect(ire.range).toBe(6)
-
-        it "sets ire's movement range to 5 if Ire moves to non-enemy square", ->
-          ire.range = 6
-          target = document.getElementById('3-0')
-
-          Player.makeMove target, puzzle, ire
-          expect(ire.range).toBe(5)
 
       describe "Fighting enemy", ->
 
@@ -75,13 +67,68 @@ describe "Player", ->
           spyOn(ire, 'fightEnemy')
 
         it "calls the fightEnemy method when target is an enemy", ->
-          target = document.getElementById('3-1')
+          target = swordEnemy
           Player.makeMove target, puzzle, ire
 
           expect(ire.fightEnemy).toHaveBeenCalled()
 
         it "does not call the fightEnemy method when target is not an enemy", ->
-          target = document.getElementById('3-0')
+          target = validBlank
           Player.makeMove target, puzzle, ire
 
           expect(ire.fightEnemy).not.toHaveBeenCalled()
+
+      describe "Updating JS Objects", ->
+          it "is increases puzzle#round if Ire does not fight", ->
+            round = puzzle.round
+            target = validBlank
+            Player.makeMove target, puzzle, ire
+
+            expect(puzzle.round).toBe(round + 1)
+
+          it "does not update puzzle#round if Ire fights", ->
+            round = puzzle.round
+            target = swordEnemy
+            Player.makeMove target, puzzle, ire
+
+            expect(puzzle.round).toBe(round)
+
+          it "reduces puzzle#enemies when ire fights an enemy", ->
+            enemies = puzzle.enemies
+
+            target = swordEnemy
+            Player.makeMove target, puzzle, ire
+            expect(puzzle.enemies).toBe(enemies - 1)
+
+          it "does not reduce puzzle#enemies when ire does not fight and enemy", ->
+            enemies = puzzle.enemies
+
+            target = validBlank
+            Player.makeMove target, puzzle, ire
+            expect(puzzle.enemies).toBe(enemies)
+
+          it "increases ire#range to 6 after Ire defeats an enemy", ->
+            target = swordEnemy
+
+            Player.makeMove target, puzzle, ire
+            expect(ire.range).toBe(6)
+
+          it "sets ire#rage to 5 if Ire moves to non-enemy square", ->
+            ire.range = 6
+            target = validBlank
+
+            Player.makeMove target, puzzle, ire
+            expect(ire.range).toBe(5)
+
+        describe "Updating puzzle info in DOM", ->
+          it "calls puzzle#domUpdatePuzzleInfo", ->
+            spyOn(puzzle, 'domUpdatePuzzleInfo')
+
+            target = validBlank
+
+            Player.makeMove target, puzzle, ire
+            expect(puzzle.domUpdatePuzzleInfo).toHaveBeenCalled()
+
+
+
+

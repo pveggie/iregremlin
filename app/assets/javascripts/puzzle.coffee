@@ -10,9 +10,11 @@
 #
 class @Puzzle
   # -- Properties ------------------------------------------------------
-  turn: 1
-
   constructor: ->
+    @number = parseInt $('#info-number').text()
+    @round = parseInt $('#info-round').text()
+    @enemies = parseInt $('#info-enemies').text()
+
     # get number of rows and create blank walkability matrix
     numRows = Math.sqrt $('td').length
     # Assuming all maps are square
@@ -108,3 +110,12 @@ class @Puzzle
       .removeClass()
       .addClass(ireType)
       .attr('data-cell-type', "ire")
+
+  domUpdatePuzzleInfo: (ire) ->
+    $('#info-round').text(@round)
+    $('#info-enemies').text(@enemies)
+
+    $('#info-hp').text(ire.hp)
+    $('#info-range').text(ire.range)
+    capitalizedWeapon = ire.weapon.charAt(0).toUpperCase() + ire.weapon.slice(1)
+    $('#info-weapon').text(capitalizedWeapon)

@@ -8,12 +8,14 @@ describe "Puzzle", ->
 
   describe "properties", ->
 
-    xit "include a number property", ->
+    it "include a number property", ->
+      expect(puzzle.number).toBe(1)
 
-    it "include a turn property with a starting value of 1", ->
-      expect(puzzle.turn).toBe(1)
+    it "include a round property with a starting value of 1", ->
+      expect(puzzle.round).toBe(1)
 
-    xit "include a remainingEnemies property", ->
+    it "include an enemies property", ->
+      expect(puzzle.enemies).toBe(3)
 
     describe "Puzzle#Constructor", ->
       it "creates a walkable cell matrix to represent the puzzle rows/columns", ->
@@ -216,3 +218,37 @@ describe "Puzzle", ->
 
           Puzzle.domUpdateIreLocation oldCell, newCell
           expect(newCell).toHaveAttr('class', 'ire-sword')
+
+      describe "puzzle#domUpdatePuzzleInfo", ->
+        ire = {}
+
+        beforeEach ->
+          ire = new Ire
+
+        it "updates the round number", ->
+          puzzle.round = 10
+          puzzle.domUpdatePuzzleInfo ire
+          expect($('#info-round').text()).toBe('10')
+
+        it "updates the number of enemies left", ->
+          puzzle.enemies = 5
+          puzzle.domUpdatePuzzleInfo ire
+          expect($('#info-enemies').text()).toBe('5')
+
+        it "updates the ire's hp", ->
+          ire.hp = 50
+          puzzle.domUpdatePuzzleInfo ire
+          expect($('#info-hp').text()).toBe('50')
+
+        it "updates ire's weapon", ->
+          ire.weapon = "lance"
+          puzzle.domUpdatePuzzleInfo ire
+          expect($('#info-weapon').text()).toBe('Lance')
+
+        it "updates the number of enemies left", ->
+          ire.range = 12
+          puzzle.domUpdatePuzzleInfo ire
+          expect($('#info-range').text()).toBe('12')
+
+
+

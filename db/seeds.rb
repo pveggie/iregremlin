@@ -25,6 +25,7 @@ rows = [
 puzzle = Puzzle.create(
   number: 1,
   name: "A quest begins",
+  enemies: 3
 )
 
 row_number = -1
@@ -41,3 +42,5 @@ rows.each do |row|
   )
   end
 end
+puzzle.enemies = 3
+puzzle.save

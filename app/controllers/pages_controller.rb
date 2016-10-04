@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   def home
-    @puzzle_rows = Puzzle.find_by(number: 1).rows
+    @puzzle = Puzzle.find_by(number: 1)
+    @puzzle_rows = @puzzle.rows
   end
 end

@@ -1,5 +1,17 @@
+.game-screen {
+  padding: 20px 30px;
+  border: 4px solid #b8b42d;
+  border-radius: 1px;
+  color: $gray-lighter;
+
+}
+
+.game-middle-row {
+  margin: 20px;
+}
+
 .game-grid{
-    margin: 30px auto;
+    box-shadow: -5px 5px 2px 0px rgba(56, 56, 53, 0.7490196078431373);
 
   td {
     border: 1px solid #AA7538;

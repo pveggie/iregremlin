@@ -14,6 +14,11 @@ RSpec.describe PagesController, type: :controller do
       get :home
       expect(assigns(:puzzle_rows)).to eq(puzzle.rows)
     end
+
+    it "assigns puzzle to @puzzle" do
+      get :home
+      expect(assigns(:puzzle)).to eq(puzzle)
+    end
   end
 end
 

@@ -81,7 +81,6 @@ end
 group :production do
   gem 'rails_12factor'
 end
-ruby '2.3.0'
 
 # From another project
 # gem 'figaro'

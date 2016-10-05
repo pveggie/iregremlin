@@ -119,3 +119,9 @@ class @Puzzle
     $('#info-range').text(ire.range)
     capitalizedWeapon = ire.weapon.charAt(0).toUpperCase() + ire.weapon.slice(1)
     $('#info-weapon').text(capitalizedWeapon)
+
+  @domInformWin: ->
+    alert("Well done! You won!")
+
+  @domInformLose: ->
+    alert("Oh dear, you lost...")

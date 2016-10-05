@@ -25,6 +25,7 @@ class @Player
 
       ire.range = 6
       puzzle.enemies -= 1
+      @checkStatus puzzle, ire
 
     else if reachableTarget and not enemyTarget
       ire.move path
@@ -32,3 +33,9 @@ class @Player
       puzzle.round += 1
 
     puzzle.domUpdatePuzzleInfo ire
+
+  @checkStatus: (puzzle, ire) ->
+    Puzzle.domInformWin() if puzzle.enemies is 0
+    Puzzle.domInformLose() if ire.hp is 0
+
+

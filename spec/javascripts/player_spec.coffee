@@ -78,6 +78,16 @@ describe "Player", ->
 
           expect(ire.fightEnemy).not.toHaveBeenCalled()
 
+      describe "Checking game status", ->
+
+        it "calls the Player#checkStatus method if Ire fights", ->
+          spyOn(Player, 'checkStatus')
+
+          target = swordEnemy
+          Player.makeMove target, puzzle, ire
+
+          expect(Player.checkStatus).toHaveBeenCalled()
+
       describe "Updating JS Objects", ->
           it "is increases puzzle#round if Ire does not fight", ->
             round = puzzle.round
@@ -128,6 +138,28 @@ describe "Player", ->
 
             Player.makeMove target, puzzle, ire
             expect(puzzle.domUpdatePuzzleInfo).toHaveBeenCalled()
+
+    # ---------------------------------------------------------------
+    describe "Player@checkStatus", ->
+      beforeEach ->
+        puzzle = new Puzzle
+        ire = new Ire
+        spyOn(Puzzle,'domInformLose')
+        spyOn(Puzzle,'domInformWin')
+
+      it "tells the player if they've lost", ->
+        ire.hp = 0
+        Player.checkStatus puzzle, ire
+        expect(Puzzle.domInformLose).toHaveBeenCalled()
+
+      it "tells the player if they've won", ->
+        puzzle.enemies = 0
+        Player.checkStatus puzzle, ire
+        expect(Puzzle.domInformWin).toHaveBeenCalled()
+
+      it "does not show win or lose messages when status is ongoing", ->
+        expect(Puzzle.domInformLose).not.toHaveBeenCalled()
+        expect(Puzzle.domInformWin).not.toHaveBeenCalled()
 
 
 

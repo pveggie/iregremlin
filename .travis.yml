@@ -3,9 +3,7 @@ rvm:
 - 2.3.0
 
 # sudo: false
-# language: ruby
-# rvm:
-#   - 2.3.0
+
 # # before_install: gem install bundler -v 1.12.5
 before_install:
   - mysql -e "create database IF NOT EXISTS test;" -uroot
@@ -16,9 +14,9 @@ services:
 before_script:
   - mysql -e 'create database myapp_test;'
 
-test:
-  username: travis
-  password: RDS_PASSWORD
+# test:
+#   username: travis
+  # password: RDS_PASSWORD
 
 # script:
 #   - export RAILS_ENV=test

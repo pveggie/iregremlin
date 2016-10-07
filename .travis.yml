@@ -17,6 +17,7 @@ before_script:
   - mysql -e 'create database myapp_test;'
 
 test:
+  username: travis
   password: RDS_PASSWORD
 
 # script:

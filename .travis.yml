@@ -15,7 +15,7 @@ before_script:
   - mysql -e 'create database myapp_test;'
 
 test:
-  password: <%= ENV['RDS_PASSWORD'] %>
+  password: RDS_PASSWORD
 
 # script:
 #   - export RAILS_ENV=test

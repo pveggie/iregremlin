@@ -1,11 +1,6 @@
 language: ruby
 rvm:
 - 2.3.0
-- 2.0.0
-- 1.9.3
-- jruby-19mode
-- rbx-2
-
 
 # sudo: false
 # language: ruby
@@ -19,12 +14,8 @@ services:
 before_script:
   - mysql -e 'create database myapp_test;'
 
-# before_script:
-#   - psql -c 'create database Haarshouse_test;' -U postgres
-
-# test:
-#   adapter: postgresql
-#   database: Haarshouse_test
+test:
+  password: <%= ENV['RDS_PASSWORD'] %>
 
 # script:
 #   - export RAILS_ENV=test

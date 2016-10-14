@@ -12,7 +12,7 @@ services:
   - mysql
 
 before_script:
-  - mysql -e 'create database myapp_test;'
+  - mysql -e 'create database iregremlin_test;'
 
 # test:
 #   username: travis

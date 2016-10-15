@@ -1,3 +1,4 @@
+{<img src="https://travis-ci.org/pveggie/iregremlin.svg?branch=master" />}[https://travis-ci.org/pveggie/iregremlin.svg?branch=master]
 == README
 
 This README would normally document whatever steps are necessary to get the

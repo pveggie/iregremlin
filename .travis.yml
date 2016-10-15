@@ -14,6 +14,12 @@ services:
 before_script:
   - mysql -e 'create database iregremlin_test;'
 
+deploy:
+  - provider: codedeploy
+        access_key_id: AWS_ACCESS_KEY
+        secret_access_key: AWS_SECRET_KEY
+        application: iregremlin
+
 # test:
 #   username: travis
   # password: RDS_PASSWORD

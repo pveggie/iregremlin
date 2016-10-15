@@ -1,39 +1,32 @@
 language: ruby
 rvm:
 - 2.3.0
-
-# sudo: false
-
-# # before_install: gem install bundler -v 1.12.5
 before_install:
-  - mysql -e "create database IF NOT EXISTS test;" -uroot
-
+- mysql -e "create database IF NOT EXISTS test;" -uroot
 services:
-  - mysql
-
+- mysql
 before_script:
-  - mysql -e 'create database iregremlin_test;'
-
+- mysql -e 'create database iregremlin_test;'
 deploy:
-  - provider: codedeploy
-    access_key_id: AWS_ACCESS_KEY
-    secret_access_key:
-      secure: AWS_SECRET_KEY
-    application: iregremlin
-    deployment_group: iregremlin-deployment
-
-# test:
-#   username: travis
-  # password: RDS_PASSWORD
-
-# script:
-#   - export RAILS_ENV=test
-#   - bundle exec rake db:create db:migrate
-
-# deploy:
-#   provider: heroku
-#   api_key:
-#     secure: ZjHB73uGCy7tOortVsrAGL5jbop5s3LfCOTveAlFqGv7V5IJ2BJSpL/7VUmGtEVZpisRb1D/Ac2a9GPUEdV33FXaog721H6Ymfl5z3+5zsO+OA1NbFOWQA5GTIJlATz1HHofY4UD6o41t0Y9Mh+Hom+YXk0JAW/O0Ud0atbFoiMNj6U7Zjj+kiGROtaJGRNf2TwB/84qswbl2cCtnNzQqvNmXPBj/sOKxO37wldtkup/B7nrunpbqUgSY8juPqyzgkl6sCGDV79eydjPKacN8lX3z6iQwyu3/zdXgw15Hr6fTpLuvxkjPTP3Og4SIVJYleuN5w8zywqo4StOrTypGxLSVJE+g2lAtWHhCY8rhJD70VecMPzBdNxB5M1viZ0CxvHnEVoC6TMEI1eMiAW5IpzF0D0jhCuxk83HqiNPyJoqMGUG/4Rz3SbdZ4epIipom7K2QKCrFzIb9IsQ7tkqkXnDwUl0ry/cdE3WdBn1KqwUW7/8OkYy5q+UOswK63lxorXHNphAK91jOkcRBecK2YdL8SX+jk94V1nvx/TiAnHICz+wFgq1RtMB/BKshuYlU9s9IHqnbtZ5sHqktYB4KcvwqZA00f3QvYIiFONC6uI/u2dcRni2NwKCKtL3Q5fQk6vcagkuQqSn/diEmYYWLu+p9rddMEAfMQJ068fMllc=
-#   app: haarshouseoftunes
-#   on:
-#     repo: pveggie/haarshouse
+- provider: s3
+  access_key_id: AKIAITXCXSTD6GETXXIA
+  secret_access_key: &1
+    secure: jUFc3AQqNeGoBUz+zXkwY5RyGxGcmFl8b/B1i4/RaZ2gYVsDF1hqCDxwdsbwdQJ0M0UX8nbIS9sFiEP3W1jBz5nHhGm+LQmKDgdMTFckQEYDomAiv/nNO2TT6nOO1zcJ2ZT/RbBUx+9ehSd92AbvFnZ2NFbbG+wYyr7MuZnDX1MBAezMJP2Wuo0u2C/4EX95guWY0X3dg5PatRW/8NZMDSO+2Kyj8cStBNJCGBixQyUWrbS376mQGY/tuyyBkfeVrRd7nBq3ORybKKy5svzNcB7lzStGvGtf6LA/queRDate4L1ZcKL19FA1Ub07wPmMPdWjDLecowhquPRhx1h6VhncPd2r7lJRz+riuJdzRZEfMcEr7ooE1fb2/hvNjPjCFYzUMfIm9Ns0lOZSPo1GYjZO+EDbHjtf5Zaq6tW7nmi2I7QkCtDDglW9FY+5RAKc5WStECzx2cQYCE1EYFthTChb2SHI6HEhT2M2Tp9YmYVAFGhqHB+sDaC9NBfjOL3bLzStKTjxjOVvzcT1oN9m+vj4qkqcb/IGflEhxlz8n/HR6CSsDF58kkoNM4oNYy/iNekfxA8FMYslfpE+8gdyECDVobzv2LZ6wveX7S6o+HTKq5B6qnPY/TOQ5FfrlKRlI4jCEFNjJP0OVx6xrjUXvbMQ3DsL1FUl0q69dZzh2tg=
+  local_dir: dpl_cd_upload
+  skip_cleanup: true
+  on: &2
+    repo: pveggie/iregremlin
+  bucket: elasticbeanstalk-eu-central-1-022078448828
+  upload_dir: latest
+- provider: codedeploy
+  access_key_id: AKIAITXCXSTD6GETXXIA
+  secret_access_key: *1
+  bucket: elasticbeanstalk-eu-central-1-022078448828
+  key: latest/iregremlin.zip
+  bundle_type: zip
+  application: iregremlin
+  deployment_group: iregremlin-deployment
+  on: *2
+before_deploy:
+- mkdir -p dpl_cd_upload
+- mv iregremlin.zip dpl_cd_upload/iregremlin.zip

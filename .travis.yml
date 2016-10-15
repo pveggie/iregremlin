@@ -16,7 +16,7 @@ deploy:
   skip_cleanup: true
   on: &2
     repo: pveggie/iregremlin
-  bucket: elasticbeanstalk-eu-central-1-022078448828
+  bucket: iregremlin-s3-bucket
   upload_dir: latest
 - provider: codedeploy
   access_key_id: AKIAITXCXSTD6GETXXIA

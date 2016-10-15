@@ -16,8 +16,9 @@ before_script:
 
 deploy:
   - provider: codedeploy
-    access_key_id: AWS_ACCESS_KEY
-    secret_access_key: AWS_SECRET_KEY
+    access_key_id: AKIAITXCXSTD6GETXXIA
+    secret_access_key:
+      secure: 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
     application: iregremlin
     deployment_group: iregremlin-deployment
 

@@ -7,6 +7,9 @@ $(document).ready ->
   ire = new Ire
 
   # --- EVENTS --------------------------------------------------
+  #Mobile Phone
+  $('td').on 'tap.userTurn', -> Player.mobileMoves this, puzzle, ire
+
   # Checking paths (hover)
   $('td').on 'mouseenter.userTurn', -> Player.browseMoves this, puzzle, ire.range
   $('table').on 'mouseleave.userTurn', -> Puzzle.domRemoveHighlighting()
@@ -14,7 +17,6 @@ $(document).ready ->
   # Confirm Destination
   $('td').on 'click.userTurn', -> Player.makeMove this, puzzle, ire
 
-  #Mobile Phone
-  $('td').on 'tap.userTurn', -> Player.mobileMoves this, puzzle, ire
+
 
 

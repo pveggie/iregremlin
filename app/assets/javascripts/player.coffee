@@ -38,8 +38,10 @@ class @Player
 
     if blueHighlighter.css('opacity') is "0.5"
       @makeMove target, puzzle, ire
+      return false
     else
       @browseMoves target, puzzle, ire.range
+      return false
 
   @checkStatus: (puzzle, ire) ->
     Puzzle.domInformWin() if puzzle.enemies is 0

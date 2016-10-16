@@ -26,13 +26,20 @@ class @Player
       ire.range = 6
       puzzle.enemies -= 1
       @checkStatus puzzle, ire
-
     else if reachableTarget and not enemyTarget
       ire.move path
       ire.range = 5
       puzzle.round += 1
 
     puzzle.domUpdatePuzzleInfo ire
+
+  @mobileMoves: (target, puzzle, ire) ->
+    blueHighlighter = $('#' + target.id + ' div.highlighter-blue')
+
+    if blueHighlighter.css('opacity') is "0.5"
+      @makeMove target, puzzle, ire
+    else
+      @browseMoves target, puzzle, ire.range
 
   @checkStatus: (puzzle, ire) ->
     Puzzle.domInformWin() if puzzle.enemies is 0

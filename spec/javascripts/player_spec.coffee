@@ -140,6 +140,52 @@ describe "Player", ->
             expect(puzzle.domUpdatePuzzleInfo).toHaveBeenCalled()
 
     # ---------------------------------------------------------------
+    describe "Player@mobileMoves", ->
+      beforeEach ->
+        puzzle = new Puzzle
+        ire = new Ire
+        spyOn(Player,'browseMoves')
+        spyOn(Player,'makeMove')
+
+      describe "first click", ->
+        it "calls the browseMoves method", ->
+          Player.mobileMoves swordEnemy, puzzle, ire
+          expect(Player.browseMoves).toHaveBeenCalled()
+
+        it "does not call the makeMove method", ->
+          Player.mobileMoves swordEnemy, puzzle, ire
+          expect(Player.makeMove).not.toHaveBeenCalled()
+
+      describe "confirm click for valid target", ->
+        beforeEach ->
+          $('#3-1 div.highlighter-blue').css('opacity', 0.5)
+
+        it "calls the makeMove method", ->
+          Player.mobileMoves swordEnemy, puzzle, ire
+          expect(Player.makeMove).toHaveBeenCalled()
+
+        it "does not call the browseMoves method", ->
+          Player.mobileMoves swordEnemy, puzzle, ire
+          expect(Player.browseMoves).not.toHaveBeenCalled()
+
+      describe "confirm click on invalid target", ->
+        target = null
+        beforeEach ->
+          target = document.getElementById('4-1')
+          $('#3-1 div.highlighter-blue').css('opacity', 0)
+          $('#3-1 div.highlighter-red').css('opacity', 0.5)
+
+        it "calls the browseMoves method", ->
+          Player.mobileMoves target, puzzle, ire
+          expect(Player.browseMoves).toHaveBeenCalled()
+
+        it "does not call the makeMove method", ->
+          Player.mobileMoves target, puzzle, ire
+          expect(Player.makeMove).not.toHaveBeenCalled()
+
+
+
+    # ---------------------------------------------------------------
     describe "Player@checkStatus", ->
       beforeEach ->
         puzzle = new Puzzle

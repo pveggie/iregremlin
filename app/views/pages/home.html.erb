@@ -5,7 +5,7 @@
 <div class="container">
   <div class="row">
 
-    <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
 
       <div class="padded bg-white full-height">
         <div class="bg-black game-screen" id="game_info">
@@ -13,8 +13,10 @@
               Puzzle <span id="info-number"><%= @puzzle.number %></span>: <%= @puzzle.name %>
           </div>
 
-          <div class="flex-container game-middle-row">
-            <div class="flex-item-padded-right">
+<!--           <div class="flex-container game-middle-row">
+            <div class="flex-item-padded-right"> -->
+          <div class="row margin-top-20">
+            <div class="col-xs-12 col-sm-7">
               <table class="border-collapse game-grid">
                 <% @puzzle_rows.each do |row| %>
                   <tr>
@@ -29,7 +31,7 @@
               </table>
             </div>
 
-            <div>
+            <div class="col-xs-12 col-sm-5">
               <div>
                 Round: <span id="info-round">1</span>
               </div>

@@ -7,14 +7,14 @@ services:
 - mysql
 before_script:
 - mysql -e 'create database iregremlin_test;'
-deploy:
-  provider: codedeploy
-  access_key_id: AKIAITXCXSTD6GETXXIA
-  secret_access_key:
-    secure: wNnr6oZ0X0LSbaxigtItVEm82h7aErMPqxkqKToR0dHU3SyT/vG9R1SxCHZi9dly53yVzJXHVxi8YS864WCr3xZ04pq4hwFFQNYVEG/4++k6bHUkyEU+4j7aZ3+6DOYAfXct0qURbpBV0OysU+EmgmjXWrIXWHgQudtlHo+8BOzozvRaPD16vTQTBInvN1JYpoInSZOfCLDr0FC0WaUcCryiWKhzUw0+VFlQYPW2wN0rqPIgAxkf3bLFITOlpMDE14QsuPw04cKG8C62wZe/+r/nqpwy2VjSz2/yY6SQl6W+28lVNyFmUoNEJXWVJD56MKwsDArbIx4VwQR0SwTlE0ygaUHTjmjIbrJZgHkhDlqArNyDOik6vPVGywMP+fi611MbXdnHDEFxLGGz9r/F/1kvEsg3jYxj1p+i0ibwlo4FTchOXObDD29cz2aA2IBq5TasrXyN7WM/2xWiiWj/Tgo8qWc2wqoZ9Bq9cjYtYcyKelHCWjncxjih82sdujZdLP6oNNqgJ+g6DBUa3Y4OfVK17MaMUkoaromQcZf/EsJgZqIe9BDo6iz22Bq5zPg6A/W7ZESjkZuv3tJB4li0Oo8B6vHV2eUdluTYRFPM/m+f6VZlZC7vpAc8ISCTsyUG/4rc35ZqltiLxixYObPI7G5RRPtpiPaYjF0qV4ycXs8=
-  bucket: iregremlin-s3-bucket
-  revision_type: github
-  application: iregremlin
-  deployment_group: iregremlin-deployment
-  on:
-    repo: pveggie/iregremlin
+# deploy:
+#   provider: codedeploy
+#   access_key_id: AKIAITXCXSTD6GETXXIA
+#   secret_access_key:
+#     secure: wNnr6oZ0X0LSbaxigtItVEm82h7aErMPqxkqKToR0dHU3SyT/vG9R1SxCHZi9dly53yVzJXHVxi8YS864WCr3xZ04pq4hwFFQNYVEG/4++k6bHUkyEU+4j7aZ3+6DOYAfXct0qURbpBV0OysU+EmgmjXWrIXWHgQudtlHo+8BOzozvRaPD16vTQTBInvN1JYpoInSZOfCLDr0FC0WaUcCryiWKhzUw0+VFlQYPW2wN0rqPIgAxkf3bLFITOlpMDE14QsuPw04cKG8C62wZe/+r/nqpwy2VjSz2/yY6SQl6W+28lVNyFmUoNEJXWVJD56MKwsDArbIx4VwQR0SwTlE0ygaUHTjmjIbrJZgHkhDlqArNyDOik6vPVGywMP+fi611MbXdnHDEFxLGGz9r/F/1kvEsg3jYxj1p+i0ibwlo4FTchOXObDD29cz2aA2IBq5TasrXyN7WM/2xWiiWj/Tgo8qWc2wqoZ9Bq9cjYtYcyKelHCWjncxjih82sdujZdLP6oNNqgJ+g6DBUa3Y4OfVK17MaMUkoaromQcZf/EsJgZqIe9BDo6iz22Bq5zPg6A/W7ZESjkZuv3tJB4li0Oo8B6vHV2eUdluTYRFPM/m+f6VZlZC7vpAc8ISCTsyUG/4rc35ZqltiLxixYObPI7G5RRPtpiPaYjF0qV4ycXs8=
+#   bucket: iregremlin-s3-bucket
+#   revision_type: github
+#   application: iregremlin
+#   deployment_group: iregremlin-deployment
+#   on:
+#     repo: pveggie/iregremlin

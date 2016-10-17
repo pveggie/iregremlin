@@ -15,7 +15,7 @@ $(document).ready ->
   $('table').on 'mouseleave.userTurn', -> Puzzle.domRemoveHighlighting()
 
   # Confirm Destination
-  $('td').on 'click.userTurn', -> Player.makeMove this, puzzle, ire
+  $('td').on 'mousedown.userTurn', -> Player.makeMove this, puzzle, ire
 
 
 

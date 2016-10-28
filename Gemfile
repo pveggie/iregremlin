@@ -37,6 +37,7 @@ gem 'puma'
 ### --- My Gems --------------------------------------------------
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
+gem "font-awesome-rails"
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-pathfinding'

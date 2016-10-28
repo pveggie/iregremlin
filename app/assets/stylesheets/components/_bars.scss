@@ -1,0 +1,19 @@
+.bar-inline div {
+  padding: 10px 0;
+  color: #e5e4ba;
+  display: inline-block;
+
+  &:nth-child(1) {
+    float: left;
+  }
+
+  &:nth-child(2) {
+    float: right;
+    padding: 0px 5px;
+    margin: 10px 0;
+  }
+}
+
+.bar-padded {
+  padding: 5px;
+}

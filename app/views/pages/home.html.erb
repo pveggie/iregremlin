@@ -9,7 +9,8 @@
           <div>
             Puzzle <span id="info-number"><%= @puzzle.number %></span>: <%= @puzzle.name %>
           </div>
-          <div class="text-right btn btn-sm btn-primary">
+          <!-- Button for instructions modal -->
+          <div class="text-right btn btn-sm btn-primary" data-toggle="modal" data-target="#instructions">
             How to Play
           </div>
         </div>
@@ -18,10 +19,12 @@
   </div>
 </div>
 
-<div class="bg-light-brown">
+<%= render 'shared/instructions' %>
+
+<div class="bg-white">
   <div class="container">
     <div class="row">
-      <div class="col-xs-12">
+      <div class="col-xs-12 col-md-8 col-md-offset-2">
 
         <div class="game-screen">
           <table class="border-collapse game-grid">
@@ -50,7 +53,7 @@
 <div class="bg-dark-brown">
   <div class="container">
     <div class="row bar-padded">
-      <div class="col-xs-12">
+      <div class="col-xs-12 col-md-8 col-md-offset-2">
 
         <div class="textbox-3-lines">
           <p>Stuff<br>stuff<br>stuff</p>

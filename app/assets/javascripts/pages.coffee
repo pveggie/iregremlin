@@ -10,12 +10,12 @@ $(document).ready ->
   #Mobile Phone
   $('td').on 'tap.userTurn', -> Player.mobileMoves this, puzzle, ire
 
-  # # Checking paths (hover)
-  # $('td').on 'mouseenter.userTurn', -> Player.browseMoves this, puzzle, ire.range
-  # $('table').on 'mouseleave.userTurn', -> Puzzle.domRemoveHighlighting()
+  # Checking paths (hover)
+  $('td').on 'mouseenter.userTurn', -> Player.browseMoves this, puzzle, ire.range
+  $('table').on 'mouseleave.userTurn', -> Puzzle.domRemoveHighlighting()
 
-  # # Confirm Destination
-  # $('td').on 'mousedown.userTurn', -> Player.makeMove this, puzzle, ire
+  # Confirm Destination
+  $('td').on 'mousedown.userTurn', -> Player.makeMove this, puzzle, ire
 
 
 

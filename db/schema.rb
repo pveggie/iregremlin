@@ -12,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 20161004113028) do
 
-  create_table "cells", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "cells", force: :cascade do |t|
     t.integer  "puzzle_id"
     t.integer  "row_number"
     t.integer  "column_number"
@@ -23,12 +26,12 @@ ActiveRecord::Schema.define(version: 20161004113028) do
     t.index ["puzzle_id"], name: "index_cells_on_puzzle_id", using: :btree
   end
 
-  create_table "puzzles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "puzzles", force: :cascade do |t|
     t.integer  "number"
     t.string   "name"
-    t.text     "description", limit: 65535
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "enemies"
   end
 

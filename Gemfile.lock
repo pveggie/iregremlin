@@ -100,11 +100,11 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.9.1)
     multi_json (1.12.1)
-    mysql2 (0.4.4)
     nio4r (1.2.1)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
+    pg (0.19.0)
     pkg-config (1.1.7)
     poltergeist (1.10.0)
       capybara (~> 2.1)
@@ -232,7 +232,7 @@ DEPENDENCIES
   faker
   jbuilder (~> 2.0)
   jquery-rails
-  mysql2 (>= 0.3.13, < 0.5)
+  pg
   poltergeist
   puma
   rails (= 5.0.0.1)
@@ -253,4 +253,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.13.2
+   1.13.6

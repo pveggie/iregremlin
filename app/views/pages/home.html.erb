@@ -1,22 +1,76 @@
 <% content_for :title do %>
   Home
 <% end %>
-
-<div class="container">
-  <div class="row">
-
-    <div class="col-xs-12 col-md-8 col-md-offset-2">
-
-      <div class="padded bg-white full-height">
-        <div class="bg-black game-screen" id="game_info">
-          <div id="info-header">
-              Puzzle <span id="info-number"><%= @puzzle.number %></span>: <%= @puzzle.name %>
+<div class="bg-dark-brown">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-8 col-md-offset-2">
+        <div id="info-header" class="bar-inline">
+          <div>
+            Puzzle <span id="info-number"><%= @puzzle.number %></span>: <%= @puzzle.name %>
           </div>
+          <!-- Button for instructions modal -->
+          <div class="text-right btn btn-sm btn-primary" data-toggle="modal" data-target="#instructions">
+            How to Play
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<!--           <div class="flex-container game-middle-row">
-            <div class="flex-item-padded-right"> -->
+<%= render 'shared/instructions' %>
+
+<div class="bg-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+
+        <div class="game-screen">
+          <table class="border-collapse game-grid">
+            <% @puzzle_rows.each do |row| %>
+              <tr>
+                <% row.each do |cell| %>
+                  <td class="<%= cell.content %>" id="<%= cell.column_number %>-<%= cell.row_number %>" data-cell-type="<%= cell.content_type %>">
+                      <div class="highlighter-blue"></div>
+                      <div class="highlighter-red"></div>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </table>
+
+          <div class="game-info-box-small">
+            <i class="fa fa-heart" aria-hidden="true"></i> <span id="info-hp">20</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bg-dark-brown">
+  <div class="container">
+    <div class="row bar-padded">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+
+        <div class="textbox-3-lines">
+          <p>Stuff<br>stuff<br>stuff</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--     <div class="row">
+      <div class="col-xs-12 col-md-8 col-md-offset-2">
+        <div class="game-screen" id="game_info">
           <div class="row margin-top-20">
             <div class="col-xs-12 col-sm-7">
+
               <table class="border-collapse game-grid">
                 <% @puzzle_rows.each do |row| %>
                   <tr>
@@ -29,6 +83,7 @@
                   </tr>
                 <% end %>
               </table>
+
             </div>
 
             <div class="col-xs-12 col-sm-5">
@@ -51,9 +106,9 @@
           </div>
 
         </div>
+
       </div>
 
-    </div>
-
+    </div> -->
   </div>
 </div>

@@ -36,9 +36,11 @@ gem 'puma'
 ### --- My Gems --------------------------------------------------
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
+gem "font-awesome-rails"
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-pathfinding'
+  gem 'rails-assets-jquery-touch-events'
 end
 
 group :development, :test do

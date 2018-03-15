@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
+ruby '2.3.3'
 
 ##### -- Generated gems -----------------------------
 gem 'rails', '5.0.0.1'
-gem 'pg'
+gem 'pg', '~> 0.18'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -67,6 +68,7 @@ group :test do
   # Poltergeist requires phantomjs to be installed on the machine.
   # http://phantomjs.org/download.html
   gem 'poltergeist'
+  gem 'phantomjs', require: 'phantomjs/poltergeist'
   # https://github.com/thoughtbot/shoulda-matchers
   gem 'shoulda-matchers', '~> 3.1'
   # https://github.com/jdliss/shoulda-callback-matchers

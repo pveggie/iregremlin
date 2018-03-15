@@ -38,6 +38,8 @@ gem 'puma'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem "font-awesome-rails"
+gem 'webpacker', '~> 3.3', '>= 3.3.1'
+gem 'react-rails', '~> 2.4', '>= 2.4.4'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-pathfinding'

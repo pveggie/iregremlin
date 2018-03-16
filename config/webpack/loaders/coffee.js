@@ -1,6 +1,4 @@
 module.exports = {
   test: /\.coffee(\.erb)?$/,
-  use: [{
-    loader: 'coffee-loader'
-  }]
+  use: ['cjsx-loader', 'coffee-loader']
 }

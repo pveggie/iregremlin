@@ -6,15 +6,19 @@ class Puzzle extends React.Component
 
   # }
 
-  constructor: (props)->
+  constructor: (props) ->
     super props
-    @state =
+    @state = {
       health: 15
       weapon: null
       enemies: 3
-    #console.log @state
+    }
+      
+    console.log @state
 
   render: ->
-    "Test"
-
+    <div>
+      <p>Test</p>
+    </div>
+    
 export default Puzzle

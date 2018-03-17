@@ -8,11 +8,11 @@ services:
   - postgresql
 
 before_script:
-  - psql -c 'create database iregremlin_test;'
+  - psql -c 'create database travis;'
 
 test:
   adapter: postgresql
-  database: iregremlin_test
+  database: travis
 
 script:
   - export RAILS_ENV=test

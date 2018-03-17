@@ -56,7 +56,7 @@ class @Puzzle
     # make enemy walkable so path to it can be generated
     if targetObject.data('cellType') is "enemy"
       # setWalkable is a pathfinder method
-      grid.setWalkableAt(targetLoc[0], targetLoc[1], true);
+      grid.setWalkableAt(targetLoc[0], targetLoc[1], true)
 
     finder = new PF.AStarFinder
 

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Creates puzzle cells with correct type according to content
 class Cell < ApplicationRecord
   # == Constants ============================================================
 

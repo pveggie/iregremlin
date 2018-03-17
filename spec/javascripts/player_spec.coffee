@@ -144,8 +144,8 @@ describe "Player", ->
       beforeEach ->
         puzzle = new Puzzle
         ire = new Ire
-        spyOn(Player,'browseMoves')
-        spyOn(Player,'makeMove')
+        spyOn(Player, 'browseMoves')
+        spyOn(Player, 'makeMove')
 
       describe "first click", ->
         it "calls the browseMoves method", ->
@@ -190,8 +190,8 @@ describe "Player", ->
       beforeEach ->
         puzzle = new Puzzle
         ire = new Ire
-        spyOn(Puzzle,'domInformLose')
-        spyOn(Puzzle,'domInformWin')
+        spyOn(Puzzle, 'domInformLose')
+        spyOn(Puzzle, 'domInformWin')
 
       it "tells the player if they've lost", ->
         ire.hp = 0

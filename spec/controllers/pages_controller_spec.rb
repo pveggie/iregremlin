@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe PagesController, type: :controller do
-
   describe "GET #home" do
     let!(:puzzle) { create(:two_by_two_puzzle, number: 1) }
 
@@ -22,10 +23,7 @@ RSpec.describe PagesController, type: :controller do
   end
 end
 
-# require 'rails_helper'
-
 # RSpec.describe TodosController, :type => :controller do
-
 #   context "GET index" do
 #   #context "POST create" do
 #   #context "GET show" do
@@ -33,7 +31,6 @@ end
 #   #context "DELETE destroy" do
 #   #context "GET new" do
 #   #context "GET edit" do
-
 
 #     # NORMALLY, you DO NOT want render_views, or you only want to call it in
 #     # a single context.
@@ -49,26 +46,34 @@ end
 #       get :edit, params
 
 #       params = { widget: { description: 'Hello World' } }
-#       params.merge!(format: :js) # Specify format for AJAX/JS responses (e.g. create.js.erb view)
+#       # Specify format for AJAX/JS responses (e.g. create.js.erb view)
+#       params.merge!(format: :js)
 #       post :create, params
 
-#       # Testing 404s in controllers (assuming default Rails handling of RecordNotFound)
-#       expect { delete :destroy, { id: 'unknown' } }.to raise_error(ActiveRecord::RecordNotFound)
+#       # Testing 404s in controllers (assuming default
+#       # Rails handling of RecordNotFound)
+#       expect { delete :destroy, id: 'unknown' }
+#         .to raise_error(ActiveRecord::RecordNotFound)
 
-#       # Rails `:symbolized` status codes at end of each status code page at http://httpstatus.es/
+#       # Rails `:symbolized` status codes at end of each status
+#       # code page at http://httpstatus.es/
 #       expect(response).to have_http_status(:success) # 200
 #       expect(response).to have_http_status(:forbidden) # 403
 
 #       expect(response).to redirect_to foo_path
-#       expect(response).to render_template(:template_filename_without_extension)
+#       expect(response)
+#        .to render_template(:template_filename_without_extension)
 #       expect(response).to render_template(:destroy)
 
-#       # Need response.body? Requires render_views call outside "it" block (see above & read given URL)
+#       # Need response.body? Requires render_views call outside "it" block
+#       # (see above & read given URL)
 #       expect(response.body).to match /Bestsellers/
 #       expect(response.body).to include "Bestsellers"
 
-#       expect(response.headers["Content-Type"]).to eq "text/html; charset=utf-8"
-#       expect(response.headers["Content-Type"]).to eq "text/javascript; charset=utf-8"
+#       expect(response.headers["Content-Type"])
+#         .to eq "text/html; charset=utf-8"
+#       expect(response.headers["Content-Type"])
+#         .to eq "text/javascript; charset=utf-8"
 
 #       # assigns(:foobar) accesses the @foobar instance variable
 #       # the controller method made available to the view
@@ -78,9 +83,9 @@ end
 
 #       # Think of assigns(:product) as @product in the controller method
 #       expect(assigns(:product)).to eq(bestseller)
-#       expect(assigns(:cat)).to be_cool # cat.cool is a boolean, google "rspec predicate matchers"
+#       # cat.cool is a boolean, google "rspec predicate matchers"
+#       expect(assigns(:cat)).to be_cool
 #       expect(assigns(:employee)).to be_a_new(Employee)
-
 
 #       # Asserting flash messages
 #       expect(flash[:notice]).to eq "Congratulations on buying our stuff!"
@@ -98,9 +103,6 @@ end
 #       invoice.reload
 #       product.reload
 #       widget.reload
-
 #     end
-
 #   end
-
 # end

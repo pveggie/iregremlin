@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe "pages/home.html.erb", type: :view do
-
   describe "puzzle grid" do
     before do
       puzzle = create(:two_by_two_puzzle, number: 1)
@@ -65,22 +66,20 @@ RSpec.describe "pages/home.html.erb", type: :view do
       render
       expect(render).to have_text('Range: 5')
     end
-
   end
 end
 
+# before(:each) do
+#   assign(:categories, [
+#     build(:category, name: "Concerts"),
+#     build(:category, name: "Animals")
+#   ])
+#   assign(:photos, [
+#     build(:remote_photo, caption_title: "Test One", categories: [build(:category, name: "Concerts")]),
+#     build(:remote_photo, caption_title: "Test Two", categories: [build(:category, name: "Concerts")])
+#   ])
+# end
 
-  # before(:each) do
-  #   assign(:categories, [
-  #     build(:category, name: "Concerts"),
-  #     build(:category, name: "Animals")
-  #   ])
-  #   assign(:photos, [
-  #     build(:remote_photo, caption_title: "Test One", categories: [build(:category, name: "Concerts")]),
-  #     build(:remote_photo, caption_title: "Test Two", categories: [build(:category, name: "Concerts")])
-  #   ])
-  # end
-
-  # after(:each) do
-  #   Photo.destroy_all
-  # end
+# after(:each) do
+#   Photo.destroy_all
+# end

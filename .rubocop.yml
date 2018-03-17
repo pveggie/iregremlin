@@ -1,0 +1,1 @@
+inherit_from: ~/code/.rubocop-rails.yml

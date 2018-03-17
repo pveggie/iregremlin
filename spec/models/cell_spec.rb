@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Cell, type: :model do
@@ -16,17 +18,18 @@ RSpec.describe Cell, type: :model do
   end
 
   describe "Callbacks" do
-    it { expect(valid_cell)
-      .to callback(:set_type)
-      .before(:validation)
+    it {
+      expect(valid_cell)
+        .to callback(:set_type)
+        .before(:validation)
     }
   end
 
   describe "Instance methods" do
     before(:each) { Cell.destroy_all }
-    after(:each) {Cell.destroy_all}
+    after(:each) { Cell.destroy_all }
 
-    describe "#set_type"
+    describe "#set_type" do
       it "sets empty as empty" do
         create(:test_cell, content: "empty")
         expect(Cell.last.content_type).to eq("empty")
@@ -66,5 +69,6 @@ RSpec.describe Cell, type: :model do
         create(:test_cell, content: "tree")
         expect(Cell.last.content_type).to eq("obstacle")
       end
+    end
   end
 end

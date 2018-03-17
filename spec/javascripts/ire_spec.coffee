@@ -21,7 +21,7 @@ describe "Ire", ->
       path = []
 
       beforeEach ->
-        path = [[1,1], [1,0]]
+        path = [[1, 1], [1, 0]]
 
       it "moves Ire along the path", ->
         ire.move path

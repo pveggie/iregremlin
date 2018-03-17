@@ -55,8 +55,8 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   #
-  # Allow "create(:factory)" rather than "FactoryGirl.create(:factory)"
-  config.include FactoryGirl::Syntax::Methods
+  # Allow "create(:factory)" rather than "FactoryBot.create(:factory)"
+  config.include FactoryBot::Syntax::Methods
 end
 
 Shoulda::Matchers.configure do |config|

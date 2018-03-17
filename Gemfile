@@ -61,7 +61,7 @@ group :development, :test do
   gem "teaspoon-jasmine"
 
   # --- Testing Tools -------------------------------------
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'faker'
 end
 
@@ -104,7 +104,6 @@ end
 #   gem 'pry-rails'
 
 #   gem 'spring-commands-rspec'
-#   # https://github.com/thoughtbot/factory_girl_rails
 
 # end
 

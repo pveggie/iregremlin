@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :cell do
     content %w(axe sword lance ire tree hill).sample
 

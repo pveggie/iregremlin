@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :puzzle do
     number (1..100).to_a.sample
     name Faker::Book.title

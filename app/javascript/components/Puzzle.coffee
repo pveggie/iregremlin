@@ -6,7 +6,7 @@ class Puzzle extends React.Component
 
   # }
 
-  constructor: (props)->
+  constructor: (props) ->
     super props
     @state = {
       health: 15

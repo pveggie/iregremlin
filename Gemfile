@@ -65,6 +65,7 @@ group :development, :test do
   # --- Testing Tools -------------------------------------
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'awesome_print', '~> 1.8'
 end
 
 group :test do

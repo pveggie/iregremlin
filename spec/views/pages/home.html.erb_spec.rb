@@ -42,30 +42,30 @@ RSpec.describe "pages/home.html.erb", type: :view do
       expect(render).to match('Title Time')
     end
 
-    it "renders the round number" do
-      render
-      expect(render).to have_text('Round: 1')
-    end
+    # it "renders the round number" do
+    #   render
+    #   expect(render).to have_text('Round: 1')
+    # end
 
-    it "renders the number of enemies" do
-      render
-      expect(render).to have_text('Enemies Remaining: 2')
-    end
+    # it "renders the number of enemies" do
+    #   render
+    #   expect(render).to have_text('Enemies Remaining: 2')
+    # end
 
-    it "renders Ire's HP" do
-      render
-      expect(render).to have_text('HP: 20')
-    end
+    # it "renders Ire's HP" do
+    #   render
+    #   expect(render).to have_text('HP: 20')
+    # end
 
-    it "renders Ire's weapon" do
-      render
-      expect(render).to have_text('Weapon: None')
-    end
+    # it "renders Ire's weapon" do
+    #   render
+    #   expect(render).to have_text('Weapon: None')
+    # end
 
-    it "renders Ire's movement range" do
-      render
-      expect(render).to have_text('Range: 5')
-    end
+    # it "renders Ire's movement range" do
+    #   render
+    #   expect(render).to have_text('Range: 5')
+    # end
   end
 end
 

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Creates a puzzle with cells arranged in rows and columns
 class Puzzle < ApplicationRecord
   # == Constants ============================================================
 
@@ -14,8 +15,9 @@ class Puzzle < ApplicationRecord
   # == Scopes ===============================================================
   # only after finding a puzzle
   def rows
-     cells
+    cells
       .select('cells.id', :row_number, :column_number, :content, :content_type)
+      .order(:id)
       .group_by { |cell| cell[:row_number] }
       .map { |array| array[1] }
   end
@@ -25,9 +27,10 @@ class Puzzle < ApplicationRecord
   # == Class Methods ========================================================
 
   # == Instance Methods =====================================================
-  private
-  def calculate_enemies
-    self.enemies = cells.select { |cell| cell.content_type == "enemy" }.count
-  end
-end
 
+  private
+
+    def calculate_enemies
+      self.enemies = cells.select { |cell| cell.content_type == "enemy" }.count
+    end
+end

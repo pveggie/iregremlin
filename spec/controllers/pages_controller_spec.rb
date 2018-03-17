@@ -11,14 +11,14 @@ RSpec.describe PagesController, type: :controller do
       expect(response).to have_http_status(:success)
     end
 
-    it "assigns puzzle rows to @puzzle_rows" do
-      get :home
-      expect(assigns(:puzzle_rows)).to eq(puzzle.rows)
-    end
-
     it "assigns puzzle to @puzzle" do
       get :home
       expect(assigns(:puzzle)).to eq(puzzle)
+    end
+
+    it "assigns puzzle rows to @puzzle_rows" do
+      get :home
+      expect(assigns(:puzzle_rows)).to eq(puzzle.rows)
     end
   end
 end

@@ -5,7 +5,7 @@ ruby '2.3.3'
 
 ##### -- Generated gems -----------------------------
 gem 'rails', '5.0.0.1'
-gem 'pg', '~> 0.18'
+gem 'pg', '0.18.4'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -38,7 +38,7 @@ gem 'puma'
 
 ### --- My Gems --------------------------------------------------
 gem 'bootstrap-sass'
-gem 'autoprefixer-rails'
+gem 'autoprefixer-rails', '~> 5.2.1'
 gem "font-awesome-rails"
 gem 'webpacker', '~> 3.3', '>= 3.3.1'
 gem 'react-rails', '~> 2.4', '>= 2.4.4'

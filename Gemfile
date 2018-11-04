@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ##### -- Generated gems -----------------------------
 gem 'rails', '5.0.0.1'
-gem 'pg'
+gem 'pg', '0.18.4'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -35,7 +35,7 @@ gem 'puma'
 
 ### --- My Gems --------------------------------------------------
 gem 'bootstrap-sass'
-gem 'autoprefixer-rails'
+gem 'autoprefixer-rails', '~> 5.2.1'
 gem "font-awesome-rails"
 
 source 'https://rails-assets.org' do
